@@ -1,5 +1,4 @@
 import 'package:employee_monitoring_app/component/em_button.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
