@@ -181,9 +181,18 @@ class _RegisterPageState extends State<RegisterPage> {
                               child: RichText(
                                 text: const TextSpan(
                                   text: 'Saya setuju dengan ',
-                                  style: TextStyle(color: Colors.black, fontSize: 12),
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                    fontFamily: 'Poppins',
+                                  ),
                                   children: <TextSpan>[
-                                    TextSpan(text: 'Syarat & Ketentuan', style: TextStyle(fontWeight: FontWeight.bold)),
+                                    TextSpan(
+                                      text: 'Syarat & Ketentuan',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                     TextSpan(text: ' yang berlaku.'),
                                   ],
                                 ),
