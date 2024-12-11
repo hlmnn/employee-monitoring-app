@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:employee_monitoring_app/ui/screen/login/login_page.dart';
+import 'package:employee_monitoring_app/choose_login_as_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Employee Monitoring',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        fontFamily: 'Poppins',
         useMaterial3: true,
       ),
       home: const SplashScreen(title: 'SplashScreen',),
@@ -43,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
           () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const LoginPage(title: 'Login'),
+          builder: (context) => const ChooseLoginAsPage(title: 'Choose Login As'),
         ),
       ),
     );
