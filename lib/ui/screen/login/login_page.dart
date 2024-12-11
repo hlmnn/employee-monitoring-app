@@ -123,11 +123,15 @@ class _LoginPageState extends State<LoginPage> {
                 RichText(
                   text: TextSpan(
                       text: 'Belum mempunyai akun?',
-                      style: const TextStyle(color: Colors.black, fontSize: 12),
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                        fontFamily: 'Poppins',
+                      ),
                       children: <TextSpan>[
                         TextSpan(text: ' Daftar sekarang disini!',
                             style: const TextStyle(
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.w600,
                                 decoration: TextDecoration.underline,
                                 color: Colors.black,
                             ),
