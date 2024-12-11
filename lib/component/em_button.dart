@@ -27,8 +27,8 @@ class EmButton extends StatelessWidget {
         ),
         child: Text(text,
           style: const TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              fontSize: 17,
               color: Colors.black
           ),
         ),
