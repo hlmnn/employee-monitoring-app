@@ -1,6 +1,6 @@
-import 'package:employee_monitoring_app/component/em_button.dart';
+import 'package:employee_monitoring_app/component/em_button/em_button.dart';
+import 'package:employee_monitoring_app/ui/screen/monitor/monitor_navigation.dart';
 import 'package:employee_monitoring_app/ui/screen/register/register_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -115,9 +115,26 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: 30),
-                EmButton(
-                    onPressed: (){},
-                    text: "Masuk"
+                EmButton.elevated(
+                  onPressed: (){
+                    Navigator.push(context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                        const MonitorNavigation(title: 'Monitor Navigation'),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    elevation: 4,
+                    backgroundColor: const Color(0xffFFBD20),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  ),
+                  text: "Masuk",
+                  textStyle: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                      color: Colors.black
+                  ),
                 ),
                 const SizedBox(height: 18),
                 RichText(
@@ -128,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                         fontSize: 12,
                         fontFamily: 'Poppins',
                       ),
-                      children: <TextSpan>[
+                      children: [
                         TextSpan(text: ' Daftar sekarang disini!',
                             style: const TextStyle(
                                 fontWeight: FontWeight.w600,

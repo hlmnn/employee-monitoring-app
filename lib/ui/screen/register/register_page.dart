@@ -1,4 +1,4 @@
-import 'package:employee_monitoring_app/component/em_button.dart';
+import 'package:employee_monitoring_app/component/em_button/em_button.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -200,7 +200,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ],
                       ),
-                      EmButton(
+                      EmButton.elevated(
                         onPressed: (){
                           SnackBar snackBar;
                           if (isChecked) {
@@ -216,7 +216,17 @@ class _RegisterPageState extends State<RegisterPage> {
                           }
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         },
-                        text: 'Daftar Sekarang'
+                        style: ElevatedButton.styleFrom(
+                          elevation: 4,
+                          backgroundColor: const Color(0xffFFBD20),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        ),
+                        text: 'Daftar Sekarang',
+                        textStyle: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                            color: Colors.black
+                        ),
                       )
                     ],
                   ),

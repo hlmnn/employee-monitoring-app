@@ -1,4 +1,4 @@
-import 'package:employee_monitoring_app/component/em_button.dart';
+import 'package:employee_monitoring_app/component/em_button/em_button.dart';
 import 'package:employee_monitoring_app/ui/screen/login/login_page.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +37,7 @@ class _ChooseLoginAsPageState extends State<ChooseLoginAsPage> {
                   SizedBox(
                     width: double.infinity, // match parent
                     height: 50,
-                    child: EmButton(
+                    child: EmButton.elevated(
                       onPressed: (){
                         Navigator.push(context,
                           MaterialPageRoute(
@@ -46,7 +46,17 @@ class _ChooseLoginAsPageState extends State<ChooseLoginAsPage> {
                           ),
                         );
                       },
+                      style: ElevatedButton.styleFrom(
+                        elevation: 4,
+                        backgroundColor: const Color(0xffFFBD20),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      ),
                       text: 'Masuk sebagai Member',
+                      textStyle: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                          color: Colors.black
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -55,7 +65,7 @@ class _ChooseLoginAsPageState extends State<ChooseLoginAsPage> {
                   SizedBox(
                     width: double.infinity, // match parent
                     height: 50,
-                    child: EmButton(
+                    child: EmButton.elevated(
                       onPressed: (){
                         Navigator.push(context,
                           MaterialPageRoute(
@@ -64,7 +74,17 @@ class _ChooseLoginAsPageState extends State<ChooseLoginAsPage> {
                           ),
                         );
                       },
+                      style: ElevatedButton.styleFrom(
+                        elevation: 4,
+                        backgroundColor: const Color(0xffFFBD20),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      ),
                       text: 'Masuk sebagai Monitor',
+                      textStyle: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                          color: Colors.black
+                      ),
                     ),
                   ),
                 ],

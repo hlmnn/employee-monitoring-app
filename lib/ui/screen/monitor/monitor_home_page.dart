@@ -1,0 +1,196 @@
+import 'package:employee_monitoring_app/component/em_button/em_button.dart';
+import 'package:employee_monitoring_app/ui/screen/leaderboard/leaderboard_page.dart';
+import 'package:employee_monitoring_app/ui/screen/monitor/monitor_home_active_task.dart';
+import 'package:employee_monitoring_app/ui/screen/monitor/monitor_home_completed%20task.dart';
+import 'package:flutter/material.dart';
+
+class MonitorHomePage extends StatefulWidget {
+  const MonitorHomePage({super.key, required this.title});
+
+  final String title;
+
+  @override
+  _MonitorHomePageState createState() => _MonitorHomePageState();
+}
+
+class _MonitorHomePageState extends State<MonitorHomePage> {
+
+  @override
+  Widget build(BuildContext context) {
+
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(56),
+          child: Stack(
+            children: [
+              Container(
+                decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(8.0),
+                        bottomLeft: Radius.circular(8.0)),
+                    color: Color(0xffffffff),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Color(0x33000000),
+                          offset: Offset(0, 2),
+                          blurRadius: 4
+                      ),
+                    ]
+                ),
+              ),
+              AppBar(
+                title: Text(widget.title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                backgroundColor: const Color(0xffFFBD20),
+                automaticallyImplyLeading: false,
+              ),
+            ]
+          ),
+        ),
+        body: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+              child: Column(
+                children: [
+                  const Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Nama Group'),
+                            Text('PDIP Demokrat Golkar Gerindra PKB PPPPP',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Kode Invite Group'),
+                          Text('DDXFSQ6F',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17
+                            ),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text('Member'),
+                          Text('10',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  EmButton.outlined(
+                    onPressed: (){},
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)
+                      ),
+                    ),
+                    text: 'Daftar Member',
+                    textStyle: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Colors.black
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  EmButton.outlined(
+                    onPressed: (){
+                      Navigator.push(context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                          const LeaderboardPage(title: 'Peringkat Progress'),
+                        ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)
+                      ),
+                    ),
+                    text: 'Peringkat Progress',
+                    textStyle: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Colors.black
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+              child: TabBar(
+                indicatorSize: TabBarIndicatorSize.tab,
+                dividerColor: Colors.transparent,
+                labelColor: const Color(0xffDD7402),
+                labelStyle: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Poppins',
+                ),
+                unselectedLabelColor:Colors.black38,
+                indicator: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10), // Creates border
+                  color: const Color(0xffFFE588),
+                ),
+                tabs: const [
+                  Tab(
+                    text: 'Task Aktif',
+                  ),
+                  Tab(
+                    text: 'Task Selesai',
+                  )
+                ],
+              ),
+            ),
+            const Expanded(
+              child: TabBarView(
+                children: [
+                  MonitorHomeActiveTaskPage(title: 'Active Task'),
+                  MonitorHomeCompletedTaskPage(title: 'Task Selesai')
+                ],
+              ),
+            ),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: const Color(0xffFFBD20),
+          onPressed: () {},
+          child: const Icon(
+            Icons.add,
+            size: 30,
+          ),
+        ),
+      ),
+    );
+  }
+}
