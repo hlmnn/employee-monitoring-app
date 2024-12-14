@@ -110,9 +110,11 @@ class _MonitorHomePageState extends State<MonitorHomePage> {
                   const SizedBox(height: 10),
                   EmButton.outlined(
                     onPressed: (){},
-                    style: ElevatedButton.styleFrom(
+                    style: OutlinedButton.styleFrom(
+                      backgroundColor: const Color(0xffFEF7FF),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)
+                        side: const BorderSide(color: Colors.black45),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                     text: 'Daftar Member',
@@ -132,9 +134,11 @@ class _MonitorHomePageState extends State<MonitorHomePage> {
                         ),
                       );
                     },
-                    style: ElevatedButton.styleFrom(
+                    style: OutlinedButton.styleFrom(
+                      backgroundColor: const Color(0xffFEF7FF),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)
+                        side: const BorderSide(color: Colors.black45),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                     text: 'Peringkat Progress',
