@@ -1,4 +1,6 @@
 import 'package:employee_monitoring_app/component/em_button/em_button.dart';
+import 'package:employee_monitoring_app/ui/screen/setting/change_password_page.dart';
+import 'package:employee_monitoring_app/ui/screen/setting/edit_profile_page.dart';
 import 'package:flutter/material.dart';
 
 class MonitorProfilePage extends StatefulWidget {
@@ -153,7 +155,12 @@ class _MonitorProfilePageState extends State<MonitorProfilePage> {
                       title: const Text('Ubah Profile'),
                       trailing: const Icon(Icons.arrow_forward_ios_rounded, color: Colors.black),
                       onTap: () {
-                        // Navigate to Edit Profile Page
+                        Navigator.push(context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                            const EditProfilePage(title: 'Ubah Profile'),
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -162,7 +169,12 @@ class _MonitorProfilePageState extends State<MonitorProfilePage> {
                     title: const Text('Ganti Kata Sandi'),
                     trailing: const Icon(Icons.arrow_forward_ios_rounded, color: Colors.black),
                     onTap: () {
-                      // Navigate to Change Password Page
+                      Navigator.push(context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                          const ChangePasswordPage(title: 'Ganti Kata Sandi'),
+                        ),
+                      );
                     },
                   ),
                   const SizedBox(height: 20),
