@@ -31,6 +31,7 @@ class _MonitorProfilePageState extends State<MonitorProfilePage> {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               ),
               text: 'Logout',
+              icon: const Icon(Icons.logout, color: Colors.black),
               textStyle: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 17,
