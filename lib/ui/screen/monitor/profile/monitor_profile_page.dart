@@ -1,5 +1,8 @@
 import 'package:employee_monitoring_app/component/em_button/em_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 
 class MonitorProfilePage extends StatefulWidget {
   const MonitorProfilePage({super.key, required this.title});
@@ -28,6 +31,97 @@ class _MonitorProfilePageState extends State<MonitorProfilePage> {
         padding: const EdgeInsets.only(left: 20, right: 20,top: 20),
         child: Column(
           children: [
+            Row(
+              children: [
+                const CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/avatar_placeholder.png'),
+                  radius: 40,
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Expanded(
+                            child: Text('Ryan Ahmad Gosling',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          RichText(
+                            text: const TextSpan(
+                              text: 'Lv.',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 12,
+                                fontFamily: 'Poppins',
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: '10',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 5),
+                      const Column(
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: SizedBox(
+                                  height: 15,
+                                  child: LinearProgressIndicator(
+                                    value: 25 / 100,
+                                    backgroundColor: Color(0xffffecc0),
+                                    color: Color(0xffFFBD20),
+                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('25/100',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                ),
+                              ),
+                              Text('Experience',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                      const Text('Monitor',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
             EmButton.elevated(
               onPressed: (){},
               style: ElevatedButton.styleFrom(
