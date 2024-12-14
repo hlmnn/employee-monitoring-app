@@ -95,7 +95,6 @@ class EmButton extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(text, style: textStyle),
-                      const Icon(Icons.arrow_forward_ios_rounded, color: Colors.black87,),
                     ],
                   )
                 );
