@@ -27,6 +27,7 @@ class _MonitorProfilePageState extends State<MonitorProfilePage> {
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20,top: 20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -119,19 +120,68 @@ class _MonitorProfilePageState extends State<MonitorProfilePage> {
               ],
             ),
             const SizedBox(height: 20),
-            EmButton.elevated(
-              onPressed: (){},
-              style: ElevatedButton.styleFrom(
-                elevation: 4,
-                backgroundColor: const Color(0xffDD0000),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              ),
-              text: 'Logout',
-              icon: const Icon(Icons.logout, color: Colors.black),
-              textStyle: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17,
-                  color: Colors.black
+            Expanded(
+              child: ListView(
+                children: [
+                  Container(
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                    child: ListTile(
+                      leading: const Icon(Icons.emoji_events, color: Colors.black),
+                      title: const Text('Achievements'),
+                      trailing: const Icon(Icons.arrow_forward_ios_rounded, color: Colors.black),
+                      onTap: () {
+                        // Navigate to Achievements Page
+                      },
+                    ),
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                    child: ListTile(
+                      leading: const Icon(Icons.edit_square, color: Colors.black),
+                      title: const Text('Ubah Profile'),
+                      trailing: const Icon(Icons.arrow_forward_ios_rounded, color: Colors.black),
+                      onTap: () {
+                        // Navigate to Edit Profile Page
+                      },
+                    ),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.edit_square, color: Colors.black),
+                    title: const Text('Ganti Kata Sandi'),
+                    trailing: const Icon(Icons.arrow_forward_ios_rounded, color: Colors.black),
+                    onTap: () {
+                      // Navigate to Change Password Page
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  EmButton.elevated(
+                    onPressed: (){},
+                    style: ElevatedButton.styleFrom(
+                      elevation: 4,
+                      backgroundColor: const Color(0xffDD0000),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    ),
+                    text: 'Logout',
+                    icon: const Icon(Icons.logout, color: Colors.black),
+                    textStyle: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                        color: Colors.black
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
