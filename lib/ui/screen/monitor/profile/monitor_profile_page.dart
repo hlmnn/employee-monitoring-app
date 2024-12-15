@@ -1,4 +1,5 @@
 import 'package:employee_monitoring_app/component/em_button/em_button.dart';
+import 'package:employee_monitoring_app/ui/screen/setting/achievement_page.dart';
 import 'package:employee_monitoring_app/ui/screen/setting/change_password_page.dart';
 import 'package:employee_monitoring_app/ui/screen/setting/edit_profile_page.dart';
 import 'package:flutter/material.dart';
@@ -138,7 +139,12 @@ class _MonitorProfilePageState extends State<MonitorProfilePage> {
                       title: const Text('Achievements'),
                       trailing: const Icon(Icons.arrow_forward_ios_rounded, color: Colors.black),
                       onTap: () {
-                        // Navigate to Achievements Page
+                        Navigator.push(context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                            const AchievementPage(title: 'Achievements'),
+                          ),
+                        );
                       },
                     ),
                   ),
