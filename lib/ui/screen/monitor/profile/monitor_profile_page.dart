@@ -14,9 +14,23 @@ class MonitorProfilePage extends StatefulWidget {
 }
 
 class _MonitorProfilePageState extends State<MonitorProfilePage> {
+  int level = 1;
+  int currentTotalExp = 2900; // example starting experience (level 7)
+  static const int baseMaxExp = 100;
+  int maxExp = baseMaxExp;
+
+  void calculateExp() {
+    while (currentTotalExp >= maxExp) {
+      currentTotalExp -= maxExp; // subtract maxExp from currentExp
+      level++; // increase the level
+      maxExp = baseMaxExp + (level - 1) * 50; // recalculate maxExp
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    calculateExp();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title,
@@ -56,17 +70,17 @@ class _MonitorProfilePageState extends State<MonitorProfilePage> {
                             ),
                           ),
                           RichText(
-                            text: const TextSpan(
+                            text: TextSpan(
                               text: 'Lv.',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 12,
                                 fontFamily: 'Poppins',
                               ),
                               children: [
                                 TextSpan(
-                                  text: '10',
-                                  style: TextStyle(
+                                  text: '$level',
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
                                   ),
@@ -77,7 +91,7 @@ class _MonitorProfilePageState extends State<MonitorProfilePage> {
                         ],
                       ),
                       const SizedBox(height: 5),
-                      const Column(
+                      Column(
                         children: [
                           Row(
                             children: [
@@ -85,9 +99,9 @@ class _MonitorProfilePageState extends State<MonitorProfilePage> {
                                 child: SizedBox(
                                   height: 15,
                                   child: LinearProgressIndicator(
-                                    value: 25 / 100,
-                                    backgroundColor: Color(0xffffecc0),
-                                    color: Color(0xffFFBD20),
+                                    value: currentTotalExp / maxExp,
+                                    backgroundColor: const Color(0xffffecc0),
+                                    color: const Color(0xffFFBD20),
                                     borderRadius: BorderRadius.all(Radius.circular(10)),
                                   ),
                                 ),
@@ -97,7 +111,7 @@ class _MonitorProfilePageState extends State<MonitorProfilePage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('25/100',
+                              Text('$currentTotalExp/$maxExp',
                                 style: TextStyle(
                                   fontSize: 11,
                                 ),
