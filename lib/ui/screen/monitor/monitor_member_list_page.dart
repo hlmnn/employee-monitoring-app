@@ -1,3 +1,4 @@
+import 'package:employee_monitoring_app/component/em_alert_dialog.dart';
 import 'package:employee_monitoring_app/component/em_card/em_card_member.dart';
 import 'package:flutter/material.dart';
 
@@ -33,33 +34,25 @@ class _MonitorMemberListPageState extends State<MonitorMemberListPage> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(56),
-        child: Stack(
-            children: [
-              Container(
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(8.0),
-                        bottomLeft: Radius.circular(8.0)),
-                    color: Color(0xffffffff),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Color(0x33000000),
-                          offset: Offset(0, 2),
-                          blurRadius: 4
-                      ),
-                    ]
-                ),
+        child: Container(
+          decoration: const BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey,
+                offset: Offset(0, 1),
+                blurRadius: 5,
               ),
-              AppBar(
-                title: Text(widget.title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-                backgroundColor: const Color(0xffFFBD20),
+            ],
+          ),
+          child: AppBar(
+            title: Text(widget.title,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
               ),
-            ]
+            ),
+            backgroundColor: const Color(0xffFFBD20),
+          ),
         ),
       ),
       body: Padding(

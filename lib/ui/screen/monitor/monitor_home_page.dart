@@ -24,34 +24,24 @@ class _MonitorHomePageState extends State<MonitorHomePage> {
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(56),
-          child: Stack(
-            children: [
-              Container(
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(8.0),
-                        bottomLeft: Radius.circular(8.0)),
-                    color: Color(0xffffffff),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Color(0x33000000),
-                          offset: Offset(0, 2),
-                          blurRadius: 4
-                      ),
-                    ]
+          child: Container(
+            decoration: const BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  blurRadius: 5,
+                ),
+              ],
+            ),
+            child: AppBar(
+              title: Text(widget.title,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
                 ),
               ),
-              AppBar(
-                title: Text(widget.title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-                backgroundColor: const Color(0xffFFBD20),
-                automaticallyImplyLeading: false,
-              ),
-            ]
+              backgroundColor: const Color(0xffFFBD20),
+            ),
           ),
         ),
         body: Column(

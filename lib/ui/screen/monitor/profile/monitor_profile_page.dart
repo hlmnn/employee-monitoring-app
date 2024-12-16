@@ -32,14 +32,27 @@ class _MonitorProfilePageState extends State<MonitorProfilePage> {
     calculateExp();
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(56),
+        child: Container(
+          decoration: const BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey,
+                blurRadius: 5,
+              ),
+            ],
+          ),
+          child: AppBar(
+            title: Text(widget.title,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+            backgroundColor: const Color(0xffFFBD20),
           ),
         ),
-        backgroundColor: const Color(0xffFFBD20),
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20,top: 20),
@@ -102,7 +115,7 @@ class _MonitorProfilePageState extends State<MonitorProfilePage> {
                                     value: currentTotalExp / maxExp,
                                     backgroundColor: const Color(0xffffecc0),
                                     color: const Color(0xffFFBD20),
-                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                    borderRadius: const BorderRadius.all(Radius.circular(10)),
                                   ),
                                 ),
                               ),
@@ -112,11 +125,11 @@ class _MonitorProfilePageState extends State<MonitorProfilePage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('$currentTotalExp/$maxExp',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 11,
                                 ),
                               ),
-                              Text('Experience',
+                              const Text('Experience',
                                 style: TextStyle(
                                   fontSize: 11,
                                 ),
