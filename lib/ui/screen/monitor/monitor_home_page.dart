@@ -3,6 +3,7 @@ import 'package:employee_monitoring_app/ui/screen/leaderboard/leaderboard_page.d
 import 'package:employee_monitoring_app/ui/screen/monitor/monitor_home_active_task.dart';
 import 'package:employee_monitoring_app/ui/screen/monitor/monitor_home_completed%20task.dart';
 import 'package:employee_monitoring_app/ui/screen/monitor/monitor_member_list_page.dart';
+import 'package:employee_monitoring_app/ui/screen/monitor/task/monitor_task_create_page.dart';
 import 'package:flutter/material.dart';
 
 class MonitorHomePage extends StatefulWidget {
@@ -187,7 +188,12 @@ class _MonitorHomePageState extends State<MonitorHomePage> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: const Color(0xffFFBD20),
           onPressed: () {
-
+            Navigator.push(context,
+              MaterialPageRoute(
+                builder: (context) =>
+                const MonitorTaskCreatePage(title: 'Buat Task')
+              )
+            );
           },
           child: const Icon(
             Icons.add,
