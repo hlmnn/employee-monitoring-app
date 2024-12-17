@@ -117,12 +117,15 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 30),
                 EmButton.elevated(
                   onPressed: (){
-                    Navigator.push(context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                        const MonitorNavigation(title: 'Monitor Navigation'),
-                      ),
-                    );
+                    if (_formKey.currentState!.validate()) {
+                      Future.delayed(Duration.zero, () {
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                              builder: (context) => const MonitorNavigation(title: 'Monitor Navigation'),
+                            ),
+                                (Route<dynamic> route) => false);
+                      });
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     elevation: 4,
