@@ -204,7 +204,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       EmButton.elevated(
                         onPressed: (){
-                          SnackBar snackBar;
                           if (isChecked) {
                             if (_formKey.currentState!.validate()) {
 
