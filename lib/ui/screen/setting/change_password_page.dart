@@ -16,8 +16,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   final TextEditingController _passwordNew = TextEditingController();
   final TextEditingController _passwordNewRepeat = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  bool isChecked = false;
-  bool _isObscureOld = true;
+  final bool _isObscureOld = true;
   bool _isObscureNew = true;
   bool _isObscureNewRepeat = true;
 
@@ -65,39 +64,29 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 controller: _passwordOld,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Mohon isi Kata Sandi anda!';
+                    return 'Mohon isi kata sandi lama anda!';
                   }
                   if ((value.isNotEmpty) && value.length < 8) {
-                    return 'Kata Sandi setidaknya memiliki panjang 8 karakter';
+                    return 'Kata sandi setidaknya memiliki panjang 8 karakter';
                   }
                   return null;
                 },
                 obscureText: _isObscureOld,
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Color(0xff461902),
                     ),
                   ),
-                  errorBorder: const OutlineInputBorder(
+                  errorBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.red),
                   ),
-                  contentPadding: const EdgeInsets.all(10),
+                  contentPadding: EdgeInsets.all(10),
                   hintText: 'Kata Sandi Lama',
-                  hintStyle: const TextStyle(
+                  hintStyle: TextStyle(
                     fontSize: 15,
                   ),
-                  prefixIcon: const Icon(Icons.lock),
-                  suffixIcon: IconButton(
-                    icon: Icon(_isObscureOld
-                        ? Icons.visibility_off
-                        : Icons.visibility),
-                    onPressed: () {
-                      setState(() {
-                        _isObscureOld = !_isObscureOld;
-                      });
-                    },
-                  ),
+                  prefixIcon: Icon(Icons.lock),
                 ),
               ),
               const SizedBox(height: 10),
@@ -105,10 +94,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 controller: _passwordNew,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Mohon isi Kata Sandi anda!';
+                    return 'Mohon buat kata sandi baru anda!';
                   }
                   if ((value.isNotEmpty) && value.length < 8) {
-                    return 'Kata Sandi setidaknya memiliki panjang 8 karakter';
+                    return 'Kata sandi setidaknya memiliki panjang 8 karakter';
                   }
                   return null;
                 },
@@ -145,10 +134,13 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 controller: _passwordNewRepeat,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Mohon isi Kata Sandi anda!';
+                    return 'Mohon ulangi kata sandi anda!';
                   }
                   if ((value.isNotEmpty) && value.length < 8) {
-                    return 'Kata Sandi setidaknya memiliki panjang 8 karakter';
+                    return 'Kata sandi setidaknya memiliki panjang 8 karakter';
+                  }
+                  if (value != _passwordNew.text) {
+                    return 'Kata sandi baru anda harus sama!';
                   }
                   return null;
                 },
