@@ -67,6 +67,13 @@ class _MonitorMemberListPageState extends State<MonitorMemberListPage> {
                 name: members[index].name,
                 role: members[index].role,
                 level: members[index].level,
+                onPressedDelete: (){
+                  EmAlertDialog.show(context,
+                    onConfirm: (){},
+                    textHeading: 'Peringatan!',
+                    textSubtitle: 'Member yang dipilih akan Anda keluarkan. Apakah Anda yakin ingin mengeluarkan member ini?',
+                  );
+                },
                 isMonitor: true,
               );
             }
