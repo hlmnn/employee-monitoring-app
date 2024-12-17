@@ -1,3 +1,4 @@
+import 'package:employee_monitoring_app/component/em_card/em_card.dart';
 import 'package:employee_monitoring_app/component/em_card/em_card_leaderboard.dart';
 import 'package:employee_monitoring_app/ui/screen/monitor/monitor_member_list_page.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +54,7 @@ class _LeaderboardPageState extends State<LeaderboardPage>{
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
             const Padding(
@@ -71,7 +72,7 @@ class _LeaderboardPageState extends State<LeaderboardPage>{
                   scrollDirection: Axis.vertical,
                   itemCount: members.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return EmCardLeaderboard(
+                    return EmCard.leaderboard(
                       onTap: (){},
                       rank: '${index+1}',
                       image: 'assets/images/avatar_placeholder.png',

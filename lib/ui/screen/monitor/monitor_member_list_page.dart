@@ -1,5 +1,5 @@
 import 'package:employee_monitoring_app/component/em_alert_dialog.dart';
-import 'package:employee_monitoring_app/component/em_card/em_card_member.dart';
+import 'package:employee_monitoring_app/component/em_card/em_card.dart';
 import 'package:flutter/material.dart';
 
 class MonitorMemberListPage extends StatefulWidget {
@@ -27,10 +27,14 @@ class _MonitorMemberListPageState extends State<MonitorMemberListPage> {
     Member(11,'John Doe Hidayat', 'Member', '17'),
   ];
 
-  @override
-  Widget build(BuildContext context) {
+  Future<void> sortList() async {
     members.sort((a, b) => a.name.compareTo(b.name)); // sort by name
     members.sort((b, a) => a.role.compareTo(b.role)); // sort by role so monitor is on top
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    sortList();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(56),
@@ -56,12 +60,12 @@ class _MonitorMemberListPageState extends State<MonitorMemberListPage> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
         child: ListView.builder(
             scrollDirection: Axis.vertical,
             itemCount: members.length,
             itemBuilder: (BuildContext context, int index) {
-              return EmCardMember(
+              return EmCard.member(
                 onTap: (){},
                 image: 'assets/images/avatar_placeholder.png',
                 name: members[index].name,
@@ -70,8 +74,8 @@ class _MonitorMemberListPageState extends State<MonitorMemberListPage> {
                 onPressedDelete: (){
                   EmAlertDialog.show(context,
                     onConfirm: (){},
-                    textHeading: 'Peringatan!',
-                    textSubtitle: 'Member yang dipilih akan Anda keluarkan. Apakah Anda yakin ingin mengeluarkan member ini?',
+                    title: 'Peringatan!',
+                    content: 'Member yang dipilih akan Anda keluarkan. Apakah Anda yakin ingin mengeluarkan member ini?',
                   );
                 },
                 isMonitor: true,
