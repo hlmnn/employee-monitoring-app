@@ -1,0 +1,1 @@
+enum TypeCard { member, leaderboard, task, item }
