@@ -56,7 +56,7 @@ class EmAlertDialog extends StatelessWidget {
   static Future<void> show(BuildContext context, {
     required String title,
     required String content,
-    required VoidCallback onConfirm,
+    required GestureTapCallback onConfirm,
   }) {
     return showDialog(
       context: context,
