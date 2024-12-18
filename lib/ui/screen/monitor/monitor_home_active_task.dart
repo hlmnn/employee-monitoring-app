@@ -1,4 +1,4 @@
-import 'package:employee_monitoring_app/component/em_alert_dialog.dart';
+import 'package:employee_monitoring_app/component/em_alert_dialog/em_create_server_dialog.dart';
 import 'package:employee_monitoring_app/component/em_error.dart';
 import 'package:flutter/material.dart';
 
@@ -37,10 +37,10 @@ class _MonitorHomeActiveTaskPageState extends State<MonitorHomeActiveTaskPage> {
               )
             : EmError(
               onPressed: (){
-                EmAlertDialog(
-                  title: 'Masuk Server',
-                  content: 'Salin dan tempel kode invite ke kolom dibawah ini, lalu klik Join untuk bergabung.',
+                EmCreateServerDialog.show(context,
                   onConfirm: (){},
+                  title: 'Buat Server',
+                  content: 'Tulis nama server sesuai yang Anda inginkan',
                 );
               },
               textAbove: 'Anda belum mempunyai server.',
