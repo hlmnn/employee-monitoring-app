@@ -1,3 +1,4 @@
+import 'package:employee_monitoring_app/component/em_alert_dialog/em_create_server_dialog.dart';
 import 'package:employee_monitoring_app/component/em_error.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +36,13 @@ class _MonitorHomeCompletedTaskPageState extends State<MonitorHomeCompletedTaskP
             },
           )
               : EmError(
-                onPressed: (){},
+                onPressed: (){
+                  EmCreateServerDialog.show(context,
+                    onConfirm: (){},
+                    title: 'Buat Server',
+                    content: 'Tulis nama server sesuai yang Anda inginkan',
+                  );
+                },
                 textAbove: 'Anda belum mempunyai server.',
                 textBelow: 'Buat server terlebih dahulu!',
               ),
