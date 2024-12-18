@@ -134,7 +134,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 controller: _passwordNewRepeat,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Mohon ulangi kata sandi anda!';
+                    return 'Mohon ulangi kata sandi baru anda!';
                   }
                   if ((value.isNotEmpty) && value.length < 8) {
                     return 'Kata sandi setidaknya memiliki panjang 8 karakter';
