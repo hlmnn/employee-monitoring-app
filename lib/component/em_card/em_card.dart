@@ -13,6 +13,10 @@ class EmCard extends StatelessWidget {
     this.level,
     this.rank,
     this.taskTotal,
+    this.title,
+    this.date,
+    this.cash,
+    this.experience,
     this.isMonitor = false,
   }) : _type = TypeCard.member,
         super(key: key);
@@ -26,8 +30,29 @@ class EmCard extends StatelessWidget {
     this.level,
     this.rank,
     this.taskTotal,
+    this.title,
+    this.date,
+    this.cash,
+    this.experience,
     this.isMonitor = false,
   }) : _type = TypeCard.leaderboard,
+        super(key: key);
+  const EmCard.task({
+    Key? key,
+    required this.onTap,
+    this.onPressedDelete,
+    this.image,
+    this.name,
+    this.role,
+    this.level,
+    this.rank,
+    this.taskTotal,
+    this.title,
+    this.date,
+    this.cash,
+    this.experience,
+    this.isMonitor = false,
+  }) : _type = TypeCard.task,
         super(key: key);
 
   final TypeCard? _type;
@@ -39,6 +64,10 @@ class EmCard extends StatelessWidget {
   final String? level;
   final String? rank;
   final String? taskTotal;
+  final String? title;
+  final String? date;
+  final String? cash;
+  final String? experience;
   final bool isMonitor;
 
 
@@ -294,7 +323,80 @@ class EmCard extends StatelessWidget {
                 ),
               );
             case TypeCard.task:
-              //
+              return InkWell(
+                borderRadius: BorderRadius.circular(10),
+                onTap: onTap,
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(title!,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 5),
+                            Row(
+                              children: [
+                                CircleAvatar(
+                                  backgroundImage: AssetImage(image!),
+                                  radius: 9,
+                                ),
+                                const SizedBox(width: 5),
+                                RichText(
+                                  text: TextSpan(
+                                    text: 'Lv.',
+                                    style: const TextStyle(
+                                      fontSize: 10,
+                                      fontFamily: 'Poppins',
+                                      color: Colors.black,
+                                    ),
+                                    children: [
+                                      TextSpan(
+                                        text: level!,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 10,
+                                        ),
+                                      )
+                                    ]
+                                  ),
+                                ),
+                                const SizedBox(width: 5),
+                                SizedBox(
+                                  width: 140,
+                                  child: Text(name!, overflow: TextOverflow.ellipsis,)
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 5),
+                            Row(
+                              children: [
+                                Image.asset('assets/images/cash.png', width: 16),
+                                const SizedBox(width: 3),
+                                Text(cash!,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(' ・ $date'),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Icon(Icons.arrow_forward_ios_rounded, color: Colors.black),
+                    ],
+                  ),
+                ),
+              );
             default:
               return Card(
                 elevation: 1,
