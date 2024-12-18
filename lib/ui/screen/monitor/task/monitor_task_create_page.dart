@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:employee_monitoring_app/component/em_button/em_button.dart';
 import 'package:employee_monitoring_app/utils/date_formatter.dart';
@@ -20,7 +21,6 @@ class _MonitorTaskCreatePageState extends State<MonitorTaskCreatePage> {
   final TextEditingController _taskDescription = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String? selectedDropdownValue;
-  SnackBar? snackBar;
 
   DateTimeRange? _selectedDateRange;
 
@@ -389,10 +389,14 @@ class _MonitorTaskCreatePageState extends State<MonitorTaskCreatePage> {
         child: EmButton.elevated(
           onPressed: () {
             if (_formKey.currentState!.validate()) {
-              snackBar = const SnackBar(
-                duration: Duration(seconds: 3),
-                content: Text("Tugas berhasil dibuat!"),
-              );
+              Flushbar(
+                message: 'Tugas berhasil dibuat!',
+                flushbarPosition: FlushbarPosition.BOTTOM,
+                margin: const EdgeInsets.all(8),
+                borderRadius: BorderRadius.circular(10),
+                duration: const Duration(seconds: 3),
+                isDismissible: false,
+              ).show(context);
             }
           },
           style: ElevatedButton.styleFrom(
@@ -400,7 +404,7 @@ class _MonitorTaskCreatePageState extends State<MonitorTaskCreatePage> {
             backgroundColor: const Color(0xffFFBD20),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           ),
-          text: 'Buat Task',
+          text: 'Buat Tugas',
           textStyle: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 17,
