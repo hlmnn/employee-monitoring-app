@@ -191,7 +191,7 @@ class _MonitorHomePageState extends State<MonitorHomePage> {
             Navigator.push(context,
               MaterialPageRoute(
                 builder: (context) =>
-                const MonitorTaskCreatePage(title: 'Buat Task')
+                const MonitorTaskCreatePage(title: 'Buat Tugas')
               )
             );
           },
