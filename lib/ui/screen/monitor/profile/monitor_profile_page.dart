@@ -54,7 +54,8 @@ class _MonitorProfilePageState extends State<MonitorProfilePage> {
           ),
         ),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         padding: const EdgeInsets.only(left: 20, right: 20,top: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -150,84 +151,82 @@ class _MonitorProfilePageState extends State<MonitorProfilePage> {
               ],
             ),
             const SizedBox(height: 20),
-            Expanded(
-              child: ListView(
-                children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          color: Colors.grey,
-                        ),
+            Column(
+              children: [
+                Container(
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        color: Colors.grey,
                       ),
                     ),
-                    child: ListTile(
-                      leading: const Icon(Icons.emoji_events, color: Colors.black),
-                      title: const Text('Achievements'),
-                      trailing: const Icon(Icons.arrow_forward_ios_rounded, color: Colors.black),
-                      onTap: () {
-                        Navigator.push(context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                            const AchievementPage(title: 'Achievements'),
-                          ),
-                        );
-                      },
-                    ),
                   ),
-                  Container(
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
-                    child: ListTile(
-                      leading: const Icon(Icons.edit_square, color: Colors.black),
-                      title: const Text('Ubah Profile'),
-                      trailing: const Icon(Icons.arrow_forward_ios_rounded, color: Colors.black),
-                      onTap: () {
-                        Navigator.push(context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                            const EditProfilePage(title: 'Ubah Profile'),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.edit_square, color: Colors.black),
-                    title: const Text('Ganti Kata Sandi'),
+                  child: ListTile(
+                    leading: const Icon(Icons.emoji_events, color: Colors.black),
+                    title: const Text('Achievements'),
                     trailing: const Icon(Icons.arrow_forward_ios_rounded, color: Colors.black),
                     onTap: () {
                       Navigator.push(context,
                         MaterialPageRoute(
                           builder: (context) =>
-                          const ChangePasswordPage(title: 'Ganti Kata Sandi'),
+                          const AchievementPage(title: 'Achievements'),
                         ),
                       );
                     },
                   ),
-                  const SizedBox(height: 20),
-                  EmButton.elevated(
-                    onPressed: (){},
-                    style: ElevatedButton.styleFrom(
-                      elevation: 4,
-                      backgroundColor: const Color(0xffDD0000),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                    ),
-                    text: 'Logout',
-                    icon: const Icon(Icons.logout, color: Colors.black),
-                    textStyle: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 17,
-                        color: Colors.black
+                ),
+                Container(
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        color: Colors.grey,
+                      ),
                     ),
                   ),
-                ],
-              ),
+                  child: ListTile(
+                    leading: const Icon(Icons.edit_square, color: Colors.black),
+                    title: const Text('Ubah Profile'),
+                    trailing: const Icon(Icons.arrow_forward_ios_rounded, color: Colors.black),
+                    onTap: () {
+                      Navigator.push(context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                          const EditProfilePage(title: 'Ubah Profile'),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                ListTile(
+                  leading: const Icon(Icons.edit_square, color: Colors.black),
+                  title: const Text('Ganti Kata Sandi'),
+                  trailing: const Icon(Icons.arrow_forward_ios_rounded, color: Colors.black),
+                  onTap: () {
+                    Navigator.push(context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                        const ChangePasswordPage(title: 'Ganti Kata Sandi'),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 20),
+                EmButton.elevated(
+                  onPressed: (){},
+                  style: ElevatedButton.styleFrom(
+                    elevation: 4,
+                    backgroundColor: const Color(0xffDD0000),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  ),
+                  text: 'Logout',
+                  icon: const Icon(Icons.logout, color: Colors.black),
+                  textStyle: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                      color: Colors.black
+                  ),
+                ),
+              ],
             ),
           ],
         )
