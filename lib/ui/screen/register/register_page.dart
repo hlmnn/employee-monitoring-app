@@ -32,132 +32,134 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: Image.asset(
-                    'assets/images/app_logo.png',
-                    height: 175,
-                    width: 175,
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(20),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Image.asset(
+                      'assets/images/app_logo.png',
+                      height: 175,
+                      width: 175,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  controller: _name,
-                  validator: (value) {
-                    return (value == null || value.isEmpty)
-                        ? 'Mohon isi Nama Lengkap anda!'
-                        : null;
-                  },
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xff461902)),
+                  const SizedBox(height: 10),
+                  TextFormField(
+                    controller: _name,
+                    validator: (value) {
+                      return (value == null || value.isEmpty)
+                          ? 'Mohon isi Nama Lengkap anda!'
+                          : null;
+                    },
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xff461902)),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                      contentPadding: EdgeInsets.all(10),
+                      hintText: 'Nama Lengkap',
+                      hintStyle: TextStyle(
+                        fontSize: 15,
+                      ),
+                      prefixIcon: Icon(Icons.person),
                     ),
-                    errorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red),
-                    ),
-                    contentPadding: EdgeInsets.all(10),
-                    hintText: 'Nama Lengkap',
-                    hintStyle: TextStyle(
-                      fontSize: 15,
-                    ),
-                    prefixIcon: Icon(Icons.person),
                   ),
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  controller: _phone,
-                  validator: (value) {
-                    return (value == null || value.isEmpty)
-                        ? 'Mohon isi No. HP anda!'
-                        : null;
-                  },
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xff461902)),
+                  const SizedBox(height: 10),
+                  TextFormField(
+                    controller: _phone,
+                    validator: (value) {
+                      return (value == null || value.isEmpty)
+                          ? 'Mohon isi No. HP anda!'
+                          : null;
+                    },
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xff461902)),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                      contentPadding: EdgeInsets.all(10),
+                      hintText: 'No. HP',
+                      hintStyle: TextStyle(
+                        fontSize: 15,
+                      ),
+                      prefixIcon: Icon(Icons.phone_android),
                     ),
-                    errorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red),
-                    ),
-                    contentPadding: EdgeInsets.all(10),
-                    hintText: 'No. HP',
-                    hintStyle: TextStyle(
-                      fontSize: 15,
-                    ),
-                    prefixIcon: Icon(Icons.phone_android),
                   ),
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  keyboardType: TextInputType.emailAddress,
-                  controller: _email,
-                  validator: (value) {
-                    return (value == null || value.isEmpty)
-                        ? 'Mohon isi Email anda!'
-                        : null;
-                  },
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xff461902)),
+                  const SizedBox(height: 10),
+                  TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    controller: _email,
+                    validator: (value) {
+                      return (value == null || value.isEmpty)
+                          ? 'Mohon isi Email anda!'
+                          : null;
+                    },
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xff461902)),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                      contentPadding: EdgeInsets.all(10),
+                      hintText: 'Email',
+                      hintStyle: TextStyle(
+                        fontSize: 15,
+                      ),
+                      prefixIcon: Icon(Icons.email),
                     ),
-                    errorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red),
-                    ),
-                    contentPadding: EdgeInsets.all(10),
-                    hintText: 'Email',
-                    hintStyle: TextStyle(
-                      fontSize: 15,
-                    ),
-                    prefixIcon: Icon(Icons.email),
                   ),
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  controller: _password,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Mohon isi Kata Sandi anda!';
-                    }
-                    if ((value.isNotEmpty) && value.length < 8) {
-                      return 'Kata Sandi setidaknya memiliki panjang 8 karakter';
-                    }
-                    return null;
-                  },
-                  obscureText: _isObscure,
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0xff461902),
+                  const SizedBox(height: 10),
+                  TextFormField(
+                    controller: _password,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Mohon isi Kata Sandi anda!';
+                      }
+                      if ((value.isNotEmpty) && value.length < 8) {
+                        return 'Kata Sandi setidaknya memiliki panjang 8 karakter';
+                      }
+                      return null;
+                    },
+                    obscureText: _isObscure,
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xff461902),
+                        ),
+                      ),
+                      errorBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                      contentPadding: const EdgeInsets.all(10),
+                      hintText: 'Kata Sandi',
+                      hintStyle: const TextStyle(
+                        fontSize: 15,
+                      ),
+                      prefixIcon: const Icon(Icons.lock),
+                      suffixIcon: IconButton(
+                        icon: Icon(_isObscure
+                            ? Icons.visibility_off
+                            : Icons.visibility),
+                        onPressed: () {
+                          setState(() {
+                            _isObscure = !_isObscure;
+                          });
+                        },
                       ),
                     ),
-                    errorBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red),
-                    ),
-                    contentPadding: const EdgeInsets.all(10),
-                    hintText: 'Kata Sandi',
-                    hintStyle: const TextStyle(
-                      fontSize: 15,
-                    ),
-                    prefixIcon: const Icon(Icons.lock),
-                    suffixIcon: IconButton(
-                      icon: Icon(_isObscure
-                          ? Icons.visibility_off
-                          : Icons.visibility),
-                      onPressed: () {
-                        setState(() {
-                          _isObscure = !_isObscure;
-                        });
-                      },
-                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
