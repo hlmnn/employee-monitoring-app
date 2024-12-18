@@ -74,7 +74,8 @@ class EmCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 1,
+      elevation: 2,
+      color: const Color(0xffFEF7FF),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -407,11 +408,9 @@ class EmCard extends StatelessWidget {
                   child: Text('Ini card'),
                 ),
               );
-
           }
         },
       ),
     );
   }
-
 }
