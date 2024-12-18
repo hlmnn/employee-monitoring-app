@@ -53,156 +53,167 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        padding: const EdgeInsets.all(20),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                controller: _passwordOld,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Mohon isi kata sandi lama anda!';
-                  }
-                  if ((value.isNotEmpty) && value.length < 8) {
-                    return 'Kata sandi setidaknya memiliki panjang 8 karakter';
-                  }
-                  return null;
-                },
-                obscureText: _isObscureOld,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0xff461902),
-                    ),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red),
-                  ),
-                  contentPadding: EdgeInsets.all(10),
-                  hintText: 'Kata Sandi Lama',
-                  hintStyle: TextStyle(
-                    fontSize: 15,
-                  ),
-                  prefixIcon: Icon(Icons.lock),
-                ),
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: _passwordNew,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Mohon buat kata sandi baru anda!';
-                  }
-                  if ((value.isNotEmpty) && value.length < 8) {
-                    return 'Kata sandi setidaknya memiliki panjang 8 karakter';
-                  }
-                  return null;
-                },
-                obscureText: _isObscureNew,
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0xff461902),
-                    ),
-                  ),
-                  errorBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red),
-                  ),
-                  contentPadding: const EdgeInsets.all(10),
-                  hintText: 'Kata Sandi Baru',
-                  hintStyle: const TextStyle(
-                    fontSize: 15,
-                  ),
-                  prefixIcon: const Icon(Icons.lock),
-                  suffixIcon: IconButton(
-                    icon: Icon(_isObscureNew
-                        ? Icons.visibility_off
-                        : Icons.visibility),
-                    onPressed: () {
-                      setState(() {
-                        _isObscureNew = !_isObscureNew;
-                      });
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            padding: const EdgeInsets.all(20),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: _passwordOld,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Mohon isi kata sandi lama anda!';
+                      }
+                      if ((value.isNotEmpty) && value.length < 8) {
+                        return 'Kata sandi setidaknya memiliki panjang 8 karakter';
+                      }
+                      return null;
                     },
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: _passwordNewRepeat,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Mohon ulangi kata sandi baru anda!';
-                  }
-                  if ((value.isNotEmpty) && value.length < 8) {
-                    return 'Kata sandi setidaknya memiliki panjang 8 karakter';
-                  }
-                  if (value != _passwordNew.text) {
-                    return 'Kata sandi baru anda harus sama!';
-                  }
-                  return null;
-                },
-                obscureText: _isObscureNewRepeat,
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0xff461902),
+                    obscureText: _isObscureOld,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xff461902),
+                        ),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                      contentPadding: EdgeInsets.all(10),
+                      hintText: 'Kata Sandi Lama',
+                      hintStyle: TextStyle(
+                        fontSize: 15,
+                      ),
+                      prefixIcon: Icon(Icons.lock),
                     ),
                   ),
-                  errorBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red),
-                  ),
-                  contentPadding: const EdgeInsets.all(10),
-                  hintText: 'Ulangi Kata Sandi Baru',
-                  hintStyle: const TextStyle(
-                    fontSize: 15,
-                  ),
-                  prefixIcon: const Icon(Icons.lock),
-                  suffixIcon: IconButton(
-                    icon: Icon(_isObscureNewRepeat
-                        ? Icons.visibility_off
-                        : Icons.visibility),
-                    onPressed: () {
-                      setState(() {
-                        _isObscureNewRepeat = !_isObscureNewRepeat;
-                      });
+                  const SizedBox(height: 10),
+                  TextFormField(
+                    controller: _passwordNew,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Mohon buat kata sandi baru anda!';
+                      }
+                      if ((value.isNotEmpty) && value.length < 8) {
+                        return 'Kata sandi setidaknya memiliki panjang 8 karakter';
+                      }
+                      return null;
                     },
+                    obscureText: _isObscureNew,
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xff461902),
+                        ),
+                      ),
+                      errorBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                      contentPadding: const EdgeInsets.all(10),
+                      hintText: 'Kata Sandi Baru',
+                      hintStyle: const TextStyle(
+                        fontSize: 15,
+                      ),
+                      prefixIcon: const Icon(Icons.lock),
+                      suffixIcon: IconButton(
+                        icon: Icon(_isObscureNew
+                            ? Icons.visibility_off
+                            : Icons.visibility),
+                        onPressed: () {
+                          setState(() {
+                            _isObscureNew = !_isObscureNew;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  TextFormField(
+                    controller: _passwordNewRepeat,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Mohon ulangi kata sandi baru anda!';
+                      }
+                      if ((value.isNotEmpty) && value.length < 8) {
+                        return 'Kata sandi setidaknya memiliki panjang 8 karakter';
+                      }
+                      if (value != _passwordNew.text) {
+                        return 'Kata sandi baru anda harus sama!';
+                      }
+                      return null;
+                    },
+                    obscureText: _isObscureNewRepeat,
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xff461902),
+                        ),
+                      ),
+                      errorBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                      contentPadding: const EdgeInsets.all(10),
+                      hintText: 'Ulangi Kata Sandi Baru',
+                      hintStyle: const TextStyle(
+                        fontSize: 15,
+                      ),
+                      prefixIcon: const Icon(Icons.lock),
+                      suffixIcon: IconButton(
+                        icon: Icon(_isObscureNewRepeat
+                            ? Icons.visibility_off
+                            : Icons.visibility),
+                        onPressed: () {
+                          setState(() {
+                            _isObscureNewRepeat = !_isObscureNewRepeat;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 150), // spacer
+                ],
+              ),
+            )
+          ),
+          Align(
+              alignment: Alignment.bottomCenter,
+              child: Theme(
+                data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  child: EmButton.elevated(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        Flushbar(
+                          message: 'Kata sandi berhasil diubah!',
+                          flushbarPosition: FlushbarPosition.BOTTOM,
+                          margin: const EdgeInsets.all(8),
+                          borderRadius: BorderRadius.circular(10),
+                          duration: const Duration(seconds: 3),
+                          isDismissible: false,
+                        ).show(context);
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      elevation: 4,
+                      backgroundColor: const Color(0xffFFBD20),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    ),
+                    text: 'Ubah Kata Sandi',
+                    textStyle: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                        color: Colors.black
+                    ),
                   ),
                 ),
-              ),
-            ],
+              )
           ),
-        )
-      ),
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 10),
-        child: EmButton.elevated(
-          onPressed: () {
-            if (_formKey.currentState!.validate()) {
-              Flushbar(
-                message: 'Kata sandi berhasil diubah!',
-                flushbarPosition: FlushbarPosition.BOTTOM,
-                margin: const EdgeInsets.all(8),
-                borderRadius: BorderRadius.circular(10),
-                duration: const Duration(seconds: 3),
-                isDismissible: false,
-              ).show(context);
-            }
-          },
-          style: ElevatedButton.styleFrom(
-            elevation: 4,
-            backgroundColor: const Color(0xffFFBD20),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          ),
-          text: 'Ubah Kata Sandi',
-          textStyle: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 17,
-              color: Colors.black
-          ),
-        ),
+        ],
       ),
     );
   }
