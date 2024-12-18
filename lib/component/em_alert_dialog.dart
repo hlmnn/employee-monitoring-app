@@ -11,7 +11,7 @@ class EmAlertDialog extends StatelessWidget {
 
   final String title;
   final String content;
-  final VoidCallback onConfirm;
+  final GestureTapCallback onConfirm;
 
   @override
   Widget build(BuildContext context) {
