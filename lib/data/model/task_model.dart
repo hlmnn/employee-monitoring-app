@@ -1,8 +1,8 @@
-import 'package:employee_monitoring_app/ui/screen/monitor/monitor_member_list_page.dart';
+import 'package:employee_monitoring_app/data/model/user_model.dart';
 
 class TaskModel {
   final String title;
-  final Member member;
+  final UserModel member;
   final String cash;
   final String exp;
   final String startDate;
@@ -15,7 +15,7 @@ class TaskModel {
 List<TaskModel> tasks = [
   TaskModel(
     'Buat Laporan Hasil Rapat',
-    Member(11,'John Doe Hidayat', 'Member', '17'),
+    UserModel(11,'John Doe Hidayat', 'Member', '17'),
     '150',
     '50',
     '20 Desember 2024',
@@ -24,7 +24,7 @@ List<TaskModel> tasks = [
   ),
   TaskModel(
     'Buat Laporan Hasil Rapat',
-    Member(4,'Zendaya', 'Member', '10'),
+    UserModel(4,'Zendaya', 'Member', '10'),
     '150',
     '50',
     '20 Desember 2024',
@@ -33,7 +33,7 @@ List<TaskModel> tasks = [
   ),
   TaskModel(
     'Buat Laporan Pertanggungjawaban',
-    Member(6,'Sigma', 'Member', '8'),
+    UserModel(6,'Sigma', 'Member', '8'),
     '150',
     '50',
     '20 Desember 2024',
@@ -42,7 +42,7 @@ List<TaskModel> tasks = [
   ),
   TaskModel(
     'Buat Laporan Pertanggungjawaban',
-    Member(2,'David', 'Member', '12'),
+    UserModel(2,'David', 'Member', '12'),
     '150',
     '50',
     '20 Desember 2024',
@@ -51,7 +51,7 @@ List<TaskModel> tasks = [
   ),
   TaskModel(
     'Buat Laporan Kegiatan',
-    Member(7,'Chad', 'Member', '15'),
+    UserModel(7,'Chad', 'Member', '15'),
     '150',
     '50',
     '20 Desember 2024',
@@ -60,7 +60,7 @@ List<TaskModel> tasks = [
   ),
   TaskModel(
     'Buat Laporan Kegiatan',
-    Member(5,'Broski', 'Member', '22'),
+    UserModel(5,'Broski', 'Member', '22'),
     '150',
     '50',
     '20 Desember 2024',
