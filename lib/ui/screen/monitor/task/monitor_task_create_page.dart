@@ -1,10 +1,9 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:employee_monitoring_app/component/em_button/em_button.dart';
+import 'package:employee_monitoring_app/data/model/user_model.dart';
 import 'package:employee_monitoring_app/utils/date_formatter.dart';
 import 'package:flutter/material.dart';
-
-import '../monitor_member_list_page.dart';
 
 class MonitorTaskCreatePage extends StatefulWidget {
   const MonitorTaskCreatePage({super.key, required this.title});
@@ -57,19 +56,6 @@ class _MonitorTaskCreatePageState extends State<MonitorTaskCreatePage> {
       });
     }
   }
-
-  List<Member> members = [
-    Member(1,'Alice', 'Member', '20'),
-    Member(2,'David', 'Member', '12'),
-    Member(3,'Ryan Ahmad Gosling', 'Monitor', '5'),
-    Member(4,'Zendaya', 'Member', '10'),
-    Member(5,'Broski', 'Member', '22'),
-    Member(6,'Sigma', 'Member', '8'),
-    Member(7,'Chad', 'Member', '15'),
-    Member(8,'Hilman Fauzi Herdiana aaaaaaaaaaaa', 'Member', '19'),
-    Member(9,'Fauzi', 'Member', '3'),
-    Member(11,'John Doe Hidayat', 'Member', '17'),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -286,7 +272,7 @@ class _MonitorTaskCreatePageState extends State<MonitorTaskCreatePage> {
                             ? 'Mohon pilih member untuk di assign tugas!'
                             : null;
                       },
-                      items: members.map<DropdownMenuItem<String>>((value) {
+                      items: members.where((member) => member.role == 'Member').map<DropdownMenuItem<String>>((value) {
                         return DropdownMenuItem (
                           value: value.id.toString(),
                           child: Text(value.name),
