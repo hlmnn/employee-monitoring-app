@@ -1,3 +1,4 @@
+import 'package:employee_monitoring_app/component/em_button/em_button.dart';
 import 'package:flutter/material.dart';
 
 import 'type_card.dart';
@@ -6,7 +7,7 @@ class EmCard extends StatelessWidget {
   const EmCard.member({
     Key? key,
     required this.onTap,
-    this.onPressedDelete,
+    this.onPressedButton,
     this.image,
     this.name,
     this.role,
@@ -17,13 +18,14 @@ class EmCard extends StatelessWidget {
     this.date,
     this.cash,
     this.experience,
+    this.price,
     this.isMonitor = false,
   }) : _type = TypeCard.member,
         super(key: key);
   const EmCard.leaderboard({
     Key? key,
     required this.onTap,
-    this.onPressedDelete,
+    this.onPressedButton,
     this.image,
     this.name,
     this.role,
@@ -34,13 +36,14 @@ class EmCard extends StatelessWidget {
     this.date,
     this.cash,
     this.experience,
+    this.price,
     this.isMonitor = false,
   }) : _type = TypeCard.leaderboard,
         super(key: key);
   const EmCard.task({
     Key? key,
     required this.onTap,
-    this.onPressedDelete,
+    this.onPressedButton,
     this.image,
     this.name,
     this.role,
@@ -51,13 +54,32 @@ class EmCard extends StatelessWidget {
     this.date,
     this.cash,
     this.experience,
+    this.price,
     this.isMonitor = false,
   }) : _type = TypeCard.task,
+        super(key: key);
+  const EmCard.item({
+    Key? key,
+    required this.onTap,
+    this.onPressedButton,
+    this.image,
+    this.name,
+    this.role,
+    this.level,
+    this.rank,
+    this.taskTotal,
+    this.title,
+    this.date,
+    this.cash,
+    this.experience,
+    this.price,
+    this.isMonitor = false,
+  }) : _type = TypeCard.item,
         super(key: key);
 
   final TypeCard? _type;
   final GestureTapCallback onTap;
-  final GestureTapCallback? onPressedDelete;
+  final GestureTapCallback? onPressedButton;
   final String? image;
   final String? name;
   final String? role;
@@ -68,6 +90,7 @@ class EmCard extends StatelessWidget {
   final String? date;
   final String? cash;
   final String? experience;
+  final int? price;
   final bool isMonitor;
 
 
@@ -194,7 +217,7 @@ class EmCard extends StatelessWidget {
                         ),
                         const SizedBox(width: 5),
                         ElevatedButton(
-                          onPressed: onPressedDelete!,
+                          onPressed: onPressedButton!,
                           style: ElevatedButton.styleFrom(
                             elevation: 4,
                             backgroundColor: const Color(0xffDD0000),
@@ -399,13 +422,91 @@ class EmCard extends StatelessWidget {
                 ),
               );
             default:
-              return Card(
-                elevation: 1,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child:  const InkWell(
-                  child: Text('Ini card'),
+              return InkWell(
+                borderRadius: BorderRadius.circular(10),
+                onTap: onTap,
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                            ),
+                            child: Image.asset(
+                              image!,
+                              width: double.infinity,
+                              height: 110,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          Text(name!,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Row(
+                            children: [
+                              Image.asset('assets/images/cash.png', width: 16),
+                              const SizedBox(width: 3),
+                              Text('$price',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 5),
+                          SizedBox(
+                            height: 35,
+                            child: isMonitor == true
+                              ? EmButton.elevated(
+                                onPressed: onPressedButton!,
+                                style: ElevatedButton.styleFrom(
+                                  elevation: 4,
+                                  backgroundColor: const Color(0xffFFBD20),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5)),
+                                ),
+                                text: 'Edit',
+                                textStyle: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black
+                                ),
+                                icon: const Icon(Icons.edit, color: Colors.black, size: 14),
+                              )
+                              : EmButton.elevated(
+                                onPressed: onPressedButton!,
+                                style: ElevatedButton.styleFrom(
+                                  elevation: 4,
+                                  backgroundColor: const Color(0xffFFBD20),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5)),
+                                ),
+                                text: 'Beli',
+                                textStyle: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black
+                                ),
+                              ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
                 ),
               );
           }
