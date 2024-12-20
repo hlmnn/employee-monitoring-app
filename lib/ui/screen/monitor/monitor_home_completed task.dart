@@ -45,6 +45,7 @@ class _MonitorHomeCompletedTaskPageState extends State<MonitorHomeCompletedTaskP
                 },
                 textAbove: 'Anda belum mempunyai server.',
                 textBelow: 'Buat server terlebih dahulu!',
+                isButton: true,
               ),
       ),
     );
