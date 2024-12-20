@@ -58,7 +58,7 @@ class _MonitorMemberListPageState extends State<MonitorMemberListPage> {
                 name: members[index].name,
                 role: members[index].role,
                 level: members[index].level,
-                onPressedDelete: (){
+                onPressedButton: (){
                   EmAlertDialog.show(context,
                     onConfirm: (){},
                     title: 'Peringatan!',
