@@ -2,7 +2,6 @@ import 'package:employee_monitoring_app/component/em_card/em_card.dart';
 import 'package:employee_monitoring_app/component/em_error.dart';
 import 'package:employee_monitoring_app/data/model/task_model.dart';
 import 'package:employee_monitoring_app/ui/screen/monitor/task/monitor_task_detail_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MonitorMemberDetailPage extends StatefulWidget {
