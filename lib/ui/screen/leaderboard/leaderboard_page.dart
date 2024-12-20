@@ -1,6 +1,7 @@
 import 'package:employee_monitoring_app/component/em_card/em_card.dart';
 import 'package:employee_monitoring_app/component/em_error.dart';
 import 'package:employee_monitoring_app/data/model/user_model.dart';
+import 'package:employee_monitoring_app/ui/screen/monitor/monitor_member_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class LeaderboardPage extends StatefulWidget {
@@ -61,7 +62,14 @@ class _LeaderboardPageState extends State<LeaderboardPage>{
                   itemBuilder: (BuildContext context, int index) {
                     if (members[index].role != 'Member') return const SizedBox.shrink();
                     return EmCard.leaderboard(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                            const MonitorMemberDetailPage(title: 'Detail Member'),
+                          ),
+                        );
+                      },
                       rank: '${members.where((member) => member.role == 'Member').toList().indexOf(members[index]) + 1}',
                       image: 'assets/images/avatar_placeholder.png',
                       name: members[index].name,
