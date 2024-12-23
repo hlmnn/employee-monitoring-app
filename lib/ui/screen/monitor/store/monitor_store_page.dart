@@ -1,5 +1,7 @@
 import 'package:employee_monitoring_app/component/em_card/em_card.dart';
 import 'package:employee_monitoring_app/ui/screen/monitor/store/monitor_reward_create_page.dart';
+import 'package:employee_monitoring_app/ui/screen/monitor/store/monitor_reward_detail_page.dart';
+import 'package:employee_monitoring_app/ui/screen/monitor/store/monitor_reward_edit_page.dart';
 import 'package:flutter/material.dart';
 
 class MonitorStorePage extends StatefulWidget {
@@ -50,12 +52,26 @@ class _MonitorStorePageState extends State<MonitorStorePage> {
             itemCount: 11,
             itemBuilder: (BuildContext context, int index) {
             return EmCard.item(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                    const MonitorRewardDetailPage(title: 'Detail Reward'),
+                  ),
+                );
+              },
               image: 'assets/images/avatar_placeholder.png',
               name: 'Item Reward Name ke-${index+1}',
               price: 100,
               isMonitor: true,
-              onPressedButton: (){},
+              onPressedButton: (){
+                Navigator.push(context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                    const MonitorRewardEditPage(title: 'Edit Reward'),
+                  ),
+                );
+              },
             );
           }
         ),
