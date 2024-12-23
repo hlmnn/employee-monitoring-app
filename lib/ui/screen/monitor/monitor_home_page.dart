@@ -42,6 +42,34 @@ class _MonitorHomePageState extends State<MonitorHomePage> {
                 ),
               ),
               backgroundColor: const Color(0xffFFBD20),
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.group, color: Colors.black),
+                  tooltip: 'Daftar Member',
+                  onPressed: () {
+                    Navigator.push(context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                        const MonitorMemberListPage(title: 'Daftar Member'),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(width: 10),
+                IconButton(
+                  icon: const Icon(Icons.leaderboard, color: Colors.black),
+                  tooltip: 'Peringkat Progress',
+                  onPressed: () {
+                    Navigator.push(context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                        const LeaderboardPage(title: 'Peringkat Progress'),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(width: 20),
+              ],
             ),
           ),
         ),
@@ -49,9 +77,9 @@ class _MonitorHomePageState extends State<MonitorHomePage> {
           children: [
             Container(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-              child: Column(
+              child: const Column(
                 children: [
-                  const Row(
+                  Row(
                     children: [
                       Expanded(
                         child: Column(
@@ -69,8 +97,8 @@ class _MonitorHomePageState extends State<MonitorHomePage> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 10),
-                  const Row(
+                  SizedBox(height: 10),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
@@ -99,59 +127,11 @@ class _MonitorHomePageState extends State<MonitorHomePage> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 10),
-                  EmButton.outlined(
-                    onPressed: (){
-                      Navigator.push(context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                          const MonitorMemberListPage(title: 'Daftar Member'),
-                        ),
-                      );
-                    },
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: const Color(0xffFEF7FF),
-                      shape: RoundedRectangleBorder(
-                        side: const BorderSide(color: Colors.black45),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    text: 'Daftar Member',
-                    textStyle: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: Colors.black
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  EmButton.outlined(
-                    onPressed: (){
-                      Navigator.push(context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                          const LeaderboardPage(title: 'Peringkat Progress'),
-                        ),
-                      );
-                    },
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: const Color(0xffFEF7FF),
-                      shape: RoundedRectangleBorder(
-                        side: const BorderSide(color: Colors.black45),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    text: 'Peringkat Progress',
-                    textStyle: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: Colors.black
-                    ),
-                  ),
                 ],
               ),
             ),
             Container(
-              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 5),
               child: TabBar(
                 indicatorSize: TabBarIndicatorSize.tab,
                 dividerColor: Colors.transparent,
