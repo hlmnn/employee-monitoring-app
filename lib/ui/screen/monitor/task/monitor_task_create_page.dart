@@ -122,7 +122,8 @@ class _MonitorTaskCreatePageState extends State<MonitorTaskCreatePage> {
                         fontSize: 15,
                       ),
                     ),
-                  ),const SizedBox(height: 10),
+                  ),
+                  const SizedBox(height: 10),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
