@@ -262,7 +262,7 @@ class _MonitorRewardCreatePageState extends State<MonitorRewardCreatePage> {
                     backgroundColor: const Color(0xffFFBD20),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   ),
-                  text: 'Buat Reward ',
+                  text: 'Buat Reward',
                   textStyle: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 17,

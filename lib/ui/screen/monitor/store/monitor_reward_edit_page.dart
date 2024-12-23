@@ -262,7 +262,7 @@ class _MonitorRewardEditPageState extends State<MonitorRewardEditPage> {
                       backgroundColor: const Color(0xffFFBD20),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     ),
-                    text: 'Buat Reward ',
+                    text: 'Ubah Reward',
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 17,
