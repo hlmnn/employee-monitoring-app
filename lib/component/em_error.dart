@@ -21,10 +21,12 @@ class EmError extends StatelessWidget{
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(
-            'assets/images/404.png',
-            width: 180,
-            height: 180,
+          Flexible(
+            child: Image.asset(
+              'assets/images/404.png',
+              width: 180,
+              height: 180,
+            ),
           ),
           Text(
             textAbove,
