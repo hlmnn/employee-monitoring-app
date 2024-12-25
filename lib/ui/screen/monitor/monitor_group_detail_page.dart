@@ -6,16 +6,16 @@ import 'package:employee_monitoring_app/data/model/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class MonitorMemberListPage extends StatefulWidget {
-  const MonitorMemberListPage({super.key, required this.title});
+class MonitorGroupDetailPage extends StatefulWidget {
+  const MonitorGroupDetailPage({super.key, required this.title});
 
   final String title;
 
   @override
-  _MonitorMemberListPageState createState() => _MonitorMemberListPageState();
+  _MonitorGroupDetailPageState createState() => _MonitorGroupDetailPageState();
 }
 
-class _MonitorMemberListPageState extends State<MonitorMemberListPage> {
+class _MonitorGroupDetailPageState extends State<MonitorGroupDetailPage> {
 
   Future<void> sortList() async {
     members.sort((a, b) => a.name.compareTo(b.name)); // sort by name
