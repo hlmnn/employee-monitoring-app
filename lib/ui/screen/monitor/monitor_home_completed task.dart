@@ -20,38 +20,38 @@ class _MonitorHomeCompletedTaskPageState extends State<MonitorHomeCompletedTaskP
   @override
   Widget build(BuildContext context) {
     return isJoinServer == true
-        ? tasks.any((task) => task.status == 'complete')
+      ? tasks.any((task) => task.status == 'complete')
         ? ListView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      scrollDirection: Axis.vertical,
-      itemCount: tasks.length,
-      itemBuilder: (BuildContext context, int index) {
-        if (tasks[index].status != 'complete') return const SizedBox.shrink();
-        return EmCard.task(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const MonitorTaskDetailPage(title: 'Detail Tugas'),
-              ),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          scrollDirection: Axis.vertical,
+          itemCount: tasks.length,
+          itemBuilder: (BuildContext context, int index) {
+            if (tasks[index].status != 'complete') return const SizedBox.shrink();
+            return EmCard.task(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MonitorTaskDetailPage(title: 'Detail Tugas'),
+                  ),
+                );
+              },
+              image: 'assets/images/avatar_placeholder.png',
+              title: '${tasks[index].title} yang ke-${index + 1}',
+              name: tasks[index].member.name,
+              level: tasks[index].member.level,
+              date: tasks[index].lastDate,
+              cash: tasks[index].cash,
+              experience: tasks[index].exp,
             );
           },
-          image: 'assets/images/avatar_placeholder.png',
-          title: '${tasks[index].title} yang ke-${index + 1}',
-          name: tasks[index].member.name,
-          level: tasks[index].member.level,
-          date: tasks[index].lastDate,
-          cash: tasks[index].cash,
-          experience: tasks[index].exp,
-        );
-      },
-    )
+        )
         : EmError(
-      onPressed: () {},
-      textAbove: 'Anda belum mempunyai tugas.',
-      textBelow: 'Buat tugas terlebih dahulu!',
-    )
-        : EmError(
+          onPressed: () {},
+          textAbove: 'Anda belum mempunyai tugas.',
+          textBelow: 'Buat tugas terlebih dahulu!',
+        )
+      : EmError(
       onPressed: () {
         EmCreateServerDialog.show(
           context,
