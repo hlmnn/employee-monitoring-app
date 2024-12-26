@@ -1,6 +1,6 @@
 import 'package:employee_monitoring_app/ui/screen/leaderboard/leaderboard_page.dart';
 import 'package:employee_monitoring_app/ui/screen/monitor/monitor_home_active_task.dart';
-import 'package:employee_monitoring_app/ui/screen/monitor/monitor_home_completed%20task.dart';
+import 'package:employee_monitoring_app/ui/screen/monitor/monitor_home_completed_task.dart';
 import 'package:employee_monitoring_app/ui/screen/monitor/monitor_group_detail_page.dart';
 import 'package:employee_monitoring_app/ui/screen/monitor/task/monitor_task_create_page.dart';
 import 'package:flutter/material.dart';
