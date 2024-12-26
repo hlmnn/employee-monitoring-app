@@ -2,7 +2,7 @@ import 'package:employee_monitoring_app/component/em_alert_dialog/em_create_serv
 import 'package:employee_monitoring_app/component/em_card/em_card.dart';
 import 'package:employee_monitoring_app/component/em_error.dart';
 import 'package:employee_monitoring_app/data/model/task_model.dart';
-import 'package:employee_monitoring_app/ui/screen/monitor/task/monitor_task_detail_page.dart';
+import 'package:employee_monitoring_app/ui/screen/member/member_task_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class MemberTaskActivePage extends StatefulWidget {
@@ -37,7 +37,7 @@ class _MemberTaskActivePageState extends State<MemberTaskActivePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const MonitorTaskDetailPage(title: 'Detail Tugas'),
+                    builder: (context) => const MemberTaskDetailPage(title: 'Detail Tugas'),
                   ),
                 );
               },
