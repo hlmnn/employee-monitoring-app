@@ -1,4 +1,5 @@
 import 'package:employee_monitoring_app/component/em_button/em_button.dart';
+import 'package:employee_monitoring_app/ui/screen/login/login_page.dart';
 import 'package:employee_monitoring_app/ui/screen/setting/achievement_page.dart';
 import 'package:employee_monitoring_app/ui/screen/setting/change_password_page.dart';
 import 'package:employee_monitoring_app/ui/screen/setting/edit_profile_page.dart';
@@ -212,7 +213,15 @@ class _MonitorProfilePageState extends State<MonitorProfilePage> {
                 ),
                 const SizedBox(height: 20),
                 EmButton.elevated(
-                  onPressed: (){},
+                  onPressed: (){
+                    Future.delayed(Duration.zero, () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => const LoginPage(title: 'Login'),
+                        )
+                      );
+                    });
+                  },
                   style: ElevatedButton.styleFrom(
                     elevation: 4,
                     backgroundColor: const Color(0xffDD0000),
