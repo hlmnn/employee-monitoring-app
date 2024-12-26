@@ -1,4 +1,5 @@
 import 'package:employee_monitoring_app/ui/screen/leaderboard/leaderboard_page.dart';
+import 'package:employee_monitoring_app/ui/screen/member/member_group_detail_page.dart';
 import 'package:employee_monitoring_app/ui/screen/member/member_task_active_page.dart';
 import 'package:employee_monitoring_app/ui/screen/member/member_task_completed_page.dart';
 import 'package:flutter/material.dart';
@@ -38,12 +39,12 @@ class _MemberHomePageState extends State<MemberHomePage> {
                     icon: const Icon(Icons.group, color: Colors.black),
                     tooltip: 'Detail Group',
                     onPressed: () {
-                      // Navigator.push(context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) =>
-                      //     const MonitorGroupDetailPage(title: 'Detail Group'),
-                      //   ),
-                      // );
+                      Navigator.push(context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                          const MemberGroupDetailPage(title: 'Detail Group'),
+                        ),
+                      );
                     },
                   ),
                   const SizedBox(width: 10),
