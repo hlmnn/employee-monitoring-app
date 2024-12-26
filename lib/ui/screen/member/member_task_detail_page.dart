@@ -18,6 +18,12 @@ class _MemberTaskDetailPageState extends State<MemberTaskDetailPage> {
   final _formKey = GlobalKey<FormState>();
 
   @override
+  void dispose() {
+    _taskReportDescription.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
