@@ -1,4 +1,6 @@
+import 'package:employee_monitoring_app/component/em_alert_dialog.dart';
 import 'package:employee_monitoring_app/component/em_card/em_card.dart';
+import 'package:employee_monitoring_app/ui/screen/member/member_reward_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class MemberStorePage extends StatefulWidget {
@@ -49,23 +51,22 @@ class _MemberStorePageState extends State<MemberStorePage> {
           itemBuilder: (BuildContext context, int index) {
             return EmCard.item(
               onTap: () {
-                // Navigator.push(context,
-                //   MaterialPageRoute(
-                //     builder: (context) =>
-                //     const MonitorRewardDetailPage(title: 'Detail Reward'),
-                //   ),
-                // );
+                Navigator.push(context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                    const MemberRewardDetailPage(title: 'Detail Reward'),
+                  ),
+                );
               },
               image: 'assets/images/avatar_placeholder.png',
               name: 'Item Reward Name ke-${index+1}',
               price: 100,
               onPressedButton: (){
-                // Navigator.push(context,
-                //   MaterialPageRoute(
-                //     builder: (context) =>
-                //     const MonitorRewardEditPage(title: 'Edit Reward'),
-                //   ),
-                // );
+                EmAlertDialog.show(context,
+                  onConfirm: (){},
+                  title: 'Peringatan!',
+                  content: 'Reward yang dipilih akan Anda beli. Apakah Anda yakin ingin membeli reward ini?',
+                );
               },
             );
           }
