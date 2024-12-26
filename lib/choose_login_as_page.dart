@@ -43,6 +43,9 @@ class _ChooseLoginAsPageState extends State<ChooseLoginAsPage> {
                           MaterialPageRoute(
                             builder: (context) =>
                             const LoginPage(title: 'Login'),
+                            settings: const RouteSettings(
+                              arguments: false,
+                            ),
                           ),
                         );
                       },
@@ -71,6 +74,9 @@ class _ChooseLoginAsPageState extends State<ChooseLoginAsPage> {
                           MaterialPageRoute(
                             builder: (context) =>
                             const LoginPage(title: 'Login'),
+                            settings: const RouteSettings(
+                              arguments: true,
+                            ),
                           ),
                         );
                       },

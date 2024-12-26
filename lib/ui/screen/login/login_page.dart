@@ -1,4 +1,5 @@
 import 'package:employee_monitoring_app/component/em_button/em_button.dart';
+import 'package:employee_monitoring_app/ui/screen/member/member_navigation.dart';
 import 'package:employee_monitoring_app/ui/screen/monitor/monitor_navigation.dart';
 import 'package:employee_monitoring_app/ui/screen/register/register_page.dart';
 import 'package:flutter/gestures.dart';
@@ -28,6 +29,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isChoiceMonitor = ModalRoute.of(context)!.settings.arguments as bool?;
+
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -121,8 +124,12 @@ class _LoginPageState extends State<LoginPage> {
                       if (_formKey.currentState!.validate()) {
                         Future.delayed(Duration.zero, () {
                           Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                builder: (context) => const MonitorNavigation(title: 'Monitor Navigation'),
+                            isChoiceMonitor == true
+                              ? MaterialPageRoute(
+                                  builder: (context) => const MonitorNavigation(title: 'Monitor Navigation'),
+                              )
+                              : MaterialPageRoute(
+                                builder: (context) => const MemberNavigation(title: 'Member Navigation'),
                               ),
                                   (Route<dynamic> route) => false);
                         });
