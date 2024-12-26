@@ -35,6 +35,21 @@ class _MemberStorePageState extends State<MemberStorePage> {
               ),
             ),
             backgroundColor: const Color(0xffFFBD20),
+            actions: [
+              Row(
+                children: [
+                  Image.asset('assets/images/cash.png', height: 15),
+                  const SizedBox(width: 5),
+                  const Text('1500',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(width: 20),
+            ],
           ),
         ),
       ),
