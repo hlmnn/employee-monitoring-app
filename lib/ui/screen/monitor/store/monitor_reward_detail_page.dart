@@ -1,4 +1,6 @@
+import 'package:employee_monitoring_app/component/em_alert_dialog.dart';
 import 'package:employee_monitoring_app/component/em_button/em_button.dart';
+import 'package:employee_monitoring_app/ui/screen/monitor/store/monitor_reward_edit_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -106,7 +108,13 @@ class _MonitorRewardDetailPageState extends State<MonitorRewardDetailPage> {
                     SizedBox(
                       width: 165,
                       child: EmButton.elevated(
-                        onPressed: () {},
+                        onPressed: () {
+                          EmAlertDialog.show(context,
+                            onConfirm: (){},
+                            title: 'Peringatan!',
+                            content: 'Reward yang dipilih akan Anda hapus. Apakah Anda yakin ingin menghapus reward ini?',
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           elevation: 4,
                           backgroundColor: const Color(0xffDD0000),
@@ -125,7 +133,14 @@ class _MonitorRewardDetailPageState extends State<MonitorRewardDetailPage> {
                     SizedBox(
                       width: 165,
                       child: EmButton.elevated(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const MonitorRewardEditPage(title: 'Edit Reward'),
+                            ),
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           elevation: 4,
                           backgroundColor: const Color(0xffFFBD20),
