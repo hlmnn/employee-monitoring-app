@@ -139,11 +139,29 @@ class _MemberProfilePageState extends State<MemberProfilePage> {
                           )
                         ],
                       ),
-                      const Text('Member',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text('Member',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Image.asset('assets/images/cash.png', height: 12),
+                              const SizedBox(width: 5),
+                              const Text('1500',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ],
                   ),
