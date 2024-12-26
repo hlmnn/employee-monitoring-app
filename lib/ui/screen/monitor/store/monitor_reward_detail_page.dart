@@ -1,7 +1,6 @@
 import 'package:employee_monitoring_app/component/em_alert_dialog.dart';
 import 'package:employee_monitoring_app/component/em_button/em_button.dart';
 import 'package:employee_monitoring_app/ui/screen/monitor/store/monitor_reward_edit_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MonitorRewardDetailPage extends StatefulWidget {
