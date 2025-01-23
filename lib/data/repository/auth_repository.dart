@@ -1,8 +1,6 @@
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:employee_monitoring_app/main.dart';
 
 class AuthRepository {
-  final supabase = Supabase.instance.client;
-
   // login with email and password
   Future<bool> login(String email, String password) async {
     await supabase.auth.signInWithPassword(

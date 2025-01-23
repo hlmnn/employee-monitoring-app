@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:employee_monitoring_app/choose_login_as_page.dart';
+import 'package:employee_monitoring_app/ui/cubit/login_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/register_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +22,7 @@ void main() async {
 
   runApp(const MyApp());
 }
+final supabase = Supabase.instance.client;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -31,6 +33,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<RegisterCubit>(
           create: (context) => RegisterCubit(),
+        ),
+        BlocProvider<LoginCubit>(
+          create: (context) => LoginCubit(),
         ),
       ],
       child: MaterialApp(
