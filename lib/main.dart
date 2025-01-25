@@ -2,11 +2,17 @@ import 'dart:async';
 
 import 'package:employee_monitoring_app/choose_login_as_page.dart';
 import 'package:employee_monitoring_app/ui/cubit/login_cubit.dart';
+import 'package:employee_monitoring_app/ui/cubit/profile_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/register_cubit.dart';
+import 'package:employee_monitoring_app/ui/cubit/splash_cubit.dart';
+import 'package:employee_monitoring_app/ui/screen/member/member_navigation.dart';
+import 'package:employee_monitoring_app/ui/screen/monitor/monitor_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import 'data/data_state.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,11 +37,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<SplashCubit>(
+          create: (context) => SplashCubit(),
+        ),
         BlocProvider<RegisterCubit>(
           create: (context) => RegisterCubit(),
         ),
         BlocProvider<LoginCubit>(
           create: (context) => LoginCubit(),
+        ),
+        BlocProvider<ProfileCubit>(
+          create: (context) => ProfileCubit(),
         ),
       ],
       child: MaterialApp(
@@ -61,33 +73,48 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
-  @override
-  void initState() {
-    super.initState();
-
-    Timer(
-      const Duration(seconds: 3),
-          () => Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const ChooseLoginAsPage(title: 'Choose Login As'),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<SplashCubit>(context).getCurrentSession();
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 90),
-      child:Image.asset(
-        'assets/images/app_logo.png',
-        height: 175,
-        width: 175,
+      child: BlocBuilder<SplashCubit, DataState>(
+        builder: (context, state) {
+          Timer(const Duration(seconds: 4), () {
+            if (state is SuccessState) {
+              print(state.data);
+              if (state.data != null) {
+                if (state.data == true) {
+                  context.read<SplashCubit>().resetState();
+                  Navigator.pushReplacement(
+                    context, MaterialPageRoute(
+                      builder: (context) => const MonitorNavigation(title: 'Monitor Navigation')),
+                  );
+                } else {
+                  context.read<SplashCubit>().resetState();
+                  Navigator.pushReplacement(
+                    context, MaterialPageRoute(
+                      builder: (context) => const MemberNavigation(title: 'Member Navigation')),
+                  );
+                }
+              } else {
+                context.read<SplashCubit>().resetState();
+                Navigator.pushReplacement(
+                  context, MaterialPageRoute(
+                    builder: (context) => const ChooseLoginAsPage(title: 'Choose Login As')
+                ),
+                );
+              }
+            }
+          });
+          return Image.asset(
+            'assets/images/app_logo.png',
+            height: 175,
+            width: 175,
+          );
+        }
       ),
     );
   }
-
 }

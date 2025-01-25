@@ -12,28 +12,34 @@ class AuthRepository {
 
   // register with email and password
   Future<bool> register(String name, String phone, String email, String password, bool isMonitor) async {
-    final isMonitorString = isMonitor.toString();
+    int level = 1;
+    int currentExp = 0;
+    int maxExp = 100;
     await supabase.auth.signUp(
       email: email,
       password: password,
       data: {
         'name': name,
         'phone': phone,
-        'is_monitor': isMonitorString,
+        'is_monitor': isMonitor,
+        'level': level,
+        'current_exp': currentExp,
+        'max_exp': maxExp
       }
     );
     return true;
   }
 
-  // logout user
-  Future<void> logout() async {
-    return await supabase.auth.signOut();
-  }
-
-  // get current user email
-  String? getCurrentUser() {
+  Future<bool?> getCurrentSession() async {
     final session = supabase.auth.currentSession;
-    final user = session?.user;
-    return user?.id;
+    if (session != null) {
+      if (session.user.userMetadata!['is_monitor'] == true) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return null;
+    }
   }
 }
