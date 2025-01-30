@@ -25,15 +25,14 @@ class ProfileRepository {
 
   Future<bool> updateUserProfile(name, phone, address) async {
     try {
-      final session = supabase.auth.currentSession;
+      final user = supabase.auth.currentUser;
       final updates = {
-        'id': session!.user.id,
         'name': name,
         'phone': phone,
-        // 'address': address,
-        // 'updated_at': DateTime.now().toIso8601String(),
+        'address': address,
+        'updated_at': DateTime.now().toIso8601String(),
       };
-      await supabase.from('profiles').upsert(updates);
+      await supabase.from('profiles').update(updates).eq('id', user!.id);
       return true;
     } catch (e) {
       rethrow;
