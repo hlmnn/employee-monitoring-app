@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:another_flushbar/flushbar.dart';
 import 'package:employee_monitoring_app/component/em_button/em_button.dart';
@@ -64,7 +63,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
       ),
       body: BlocBuilder<EditProfileCubit, DataState> (
         builder: (context, state) {
-          bool isMonitor = false;
           if (state is LoadingState) {
             return const Center(
                 child: EmCircularLoading(size: 30, color: Color(0xffFFBD20))
@@ -74,7 +72,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
               _name.text = state.data.name;
               _phone.text = state.data.phone;
               _address.text = state.data.address;
-              isMonitor = state.data.isMonitor;
             }
           }
           return Stack(

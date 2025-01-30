@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:employee_monitoring_app/choose_login_as_page.dart';
+import 'package:employee_monitoring_app/ui/cubit/edit_profile_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/login_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/profile_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/register_cubit.dart';
@@ -48,6 +49,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<ProfileCubit>(
           create: (context) => ProfileCubit(),
+        ),
+        BlocProvider<EditProfileCubit>(
+          create: (context) => EditProfileCubit(),
         ),
       ],
       child: MaterialApp(
