@@ -3,11 +3,22 @@ import 'package:employee_monitoring_app/main.dart';
 class AuthRepository {
   // login with email and password
   Future<bool> login(String email, String password) async {
-    await supabase.auth.signInWithPassword(
+    try {
+      final response = await supabase.auth.signInWithPassword(
         email: email,
         password: password,
-    );
-    return true;
+      );
+
+      // If login is successful, refresh the session
+      if (response.user != null) {
+        await supabase.auth.refreshSession();
+        return true;
+      } else {
+        throw Exception("Login failed: User not found.");
+      }
+    } catch (e) {
+      throw Exception("Login failed: ${e.toString()}");
+    }
   }
 
   // register with email and password
