@@ -21,7 +21,7 @@ class MonitorProfilePage extends StatefulWidget {
 class _MonitorProfilePageState extends State<MonitorProfilePage> {
   @override
   Widget build(BuildContext context) {
-    context.read<ProfileCubit>().getCurrentUser();
+    context.read<ProfileCubit>().getCurrentUserProfile();
 
     return Scaffold(
       appBar: PreferredSize(
@@ -52,7 +52,7 @@ class _MonitorProfilePageState extends State<MonitorProfilePage> {
           String role = '';
           int level = 0;
           int currentExp = 0;
-          int maxExp = 0;
+          int maxExp = 1;
 
           if (state is LoadingState) {
             return const Center(
@@ -69,11 +69,11 @@ class _MonitorProfilePageState extends State<MonitorProfilePage> {
                     ), (Route<dynamic> route) => false);
               });
             } else {
-              name = state.data.userMetadata['name'];
-              level = state.data.userMetadata['level'];
-              currentExp = state.data.userMetadata['current_exp'];
-              maxExp = state.data.userMetadata['max_exp'];
-              state.data.userMetadata['is_monitor'] == true ? role = 'Monitor' : role = 'Member';
+              name = state.data.name;
+              level = state.data.level;
+              currentExp = state.data.currentExp;
+              maxExp = state.data.maxExp;
+              state.data.isMonitor == true ? role = 'Monitor' : role = 'Member';
 
               // context.read<ProfileCubit>().calculateExp(int.parse(maxExp), int.parse(currentExp), int.parse(maxExp));
             }
