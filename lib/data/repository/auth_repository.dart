@@ -23,22 +23,30 @@ class AuthRepository {
 
   // register with email and password
   Future<bool> register(String name, String phone, String email, String password, bool isMonitor) async {
-    int level = 1;
-    int currentExp = 0;
-    int maxExp = 100;
-    await supabase.auth.signUp(
-      email: email,
-      password: password,
-      data: {
-        'name': name,
-        'phone': phone,
-        'is_monitor': isMonitor,
-        'level': level,
-        'current_exp': currentExp,
-        'max_exp': maxExp
+    try {
+      int level = 1;
+      int currentExp = 0;
+      int maxExp = 100;
+      final response = await supabase.auth.signUp(
+        email: email,
+        password: password,
+        data: {
+          'name': name,
+          'phone': phone,
+          'is_monitor': isMonitor,
+          'level': level,
+          'current_exp': currentExp,
+          'max_exp': maxExp
+        },
+        emailRedirectTo: null, // prevents automatic login
+      );
+      if (response.user == null) {
+        return false; // register failed
       }
-    );
-    return true;
+      return true;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<bool?> getCurrentSession() async {
