@@ -22,7 +22,7 @@ class _MonitorHomeActiveTaskPageState extends State<MonitorHomeActiveTaskPage> {
     return isJoinServer == true
       ? tasks.any((task) => task.status == 'active')
         ? ListView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           scrollDirection: Axis.vertical,
           itemCount: tasks.length,
           itemBuilder: (BuildContext context, int index) {
