@@ -8,7 +8,7 @@ class LoginCubit extends Cubit<DataState>{
 
   LoginCubit() : super(InitialState());
 
-  Future<void> login(String email, String password) async {
+  void login(String email, String password) async {
     try{
       emit(LoadingState());
       final data = await repository.login(email, password);
