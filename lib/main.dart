@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:employee_monitoring_app/choose_login_as_page.dart';
+import 'package:employee_monitoring_app/ui/cubit/group_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/edit_profile_cubit.dart';
+import 'package:employee_monitoring_app/ui/cubit/home_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/login_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/profile_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/register_cubit.dart';
@@ -53,6 +55,12 @@ class MyApp extends StatelessWidget {
         BlocProvider<EditProfileCubit>(
           create: (context) => EditProfileCubit(),
         ),
+        BlocProvider<HomeCubit>(
+          create: (context) => HomeCubit(),
+        ),
+        BlocProvider<GroupCubit>(
+          create: (context) => GroupCubit(),
+        ),
       ],
       child: MaterialApp(
         title: 'Employee Monitoring',
@@ -85,30 +93,36 @@ class _SplashScreenState extends State<SplashScreen> {
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 90),
       child: BlocBuilder<SplashCubit, DataState>(
         builder: (context, state) {
-          Timer(const Duration(seconds: 4), () {
+          Future.delayed(const Duration(seconds: 4), () {
+            if (!mounted) return;
             if (state is SuccessState) {
               print(state.data);
               if (state.data != null) {
                 if (state.data == true) {
                   context.read<SplashCubit>().resetState();
-                  Navigator.pushReplacement(
-                    context, MaterialPageRoute(
-                      builder: (context) => const MonitorNavigation(title: 'Monitor Navigation')),
-                  );
+                  if (mounted) {
+                    Navigator.pushReplacement(
+                      context, MaterialPageRoute(
+                        builder: (context) => const MonitorNavigation(title: 'Monitor Navigation')),
+                    );
+                  }
                 } else {
                   context.read<SplashCubit>().resetState();
-                  Navigator.pushReplacement(
-                    context, MaterialPageRoute(
-                      builder: (context) => const MemberNavigation(title: 'Member Navigation')),
-                  );
+                  if (mounted) {
+                    Navigator.pushReplacement(
+                      context, MaterialPageRoute(
+                        builder: (context) => const MemberNavigation(title: 'Member Navigation')),
+                    );
+                  }
                 }
               } else {
                 context.read<SplashCubit>().resetState();
-                Navigator.pushReplacement(
-                  context, MaterialPageRoute(
-                    builder: (context) => const ChooseLoginAsPage(title: 'Choose Login As')
-                ),
-                );
+                if (mounted) {
+                  Navigator.pushReplacement(
+                    context, MaterialPageRoute(
+                      builder: (context) => const ChooseLoginAsPage(title: 'Choose Login As')),
+                  );
+                }
               }
             }
           });
