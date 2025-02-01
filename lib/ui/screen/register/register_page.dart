@@ -47,11 +47,19 @@ class _RegisterPageState extends State<RegisterPage> {
               } else if (state is SuccessState) {
                 context.read<RegisterCubit>().resetState();
                 Future.delayed(Duration.zero, () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) =>
+                  Flushbar(
+                    message: 'Register berhasil!',
+                    flushbarPosition: FlushbarPosition.BOTTOM,
+                    margin: const EdgeInsets.all(8),
+                    borderRadius: BorderRadius.circular(10),
+                    duration: const Duration(seconds: 2),
+                    isDismissible: false,
+                  ).show(context).then((_) {
+                    Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (context) =>
                       const LoginPage(title: 'Login'))
-                  );
+                    );
+                  });
                 });
               }
 
