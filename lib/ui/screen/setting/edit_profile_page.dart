@@ -199,18 +199,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 isDismissible: false,
                               ).show(context);
                               context.read<EditProfileCubit>().resetState();
-                            } if (state is SuccessState) {
-                              Flushbar(
-                                message: 'Profile berhasil diubah!',
-                                flushbarPosition: FlushbarPosition.BOTTOM,
-                                margin: const EdgeInsets.all(8),
-                                borderRadius: BorderRadius.circular(10),
-                                duration: const Duration(seconds: 3),
-                                isDismissible: false,
-                              ).show(context);
-                              Future.delayed(const Duration(seconds: 1), () {
-                                BlocProvider.of<ProfileCubit>(context).getCurrentUserProfile();
-                                Navigator.pop(context);
+                            } else if (state is SuccessState) {
+                              Future.delayed(Duration.zero, () {
+                                Flushbar(
+                                  message: 'Profile berhasil diubah!',
+                                  flushbarPosition: FlushbarPosition.BOTTOM,
+                                  margin: const EdgeInsets.all(8),
+                                  borderRadius: BorderRadius.circular(10),
+                                  duration: const Duration(seconds: 2),
+                                  isDismissible: false,
+                                ).show(context).then((_) {
+                                  BlocProvider.of<ProfileCubit>(context).getCurrentUserProfile();
+                                  Navigator.pop(context);
+                                });
                               });
                               context.read<EditProfileCubit>().resetState();
                             }
