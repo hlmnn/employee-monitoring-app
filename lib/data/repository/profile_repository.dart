@@ -15,8 +15,12 @@ class ProfileRepository {
   Future<AuthUserModel> getCurrentUserProfile() async {
     try {
       final session = supabase.auth.currentSession;
-      final response = await supabase.from('profiles').select().eq('id', session!.user.id).single();
+      if (session == null) throw Exception("User not logged in");
+      final String userId = session.user.id;
+
+      final response = await supabase.from('profiles').select().eq('id', userId).single();
       final data = AuthUserModel.fromJson(response);
+
       return data;
     } catch (e) {
       rethrow;
@@ -25,14 +29,18 @@ class ProfileRepository {
 
   Future<bool> updateUserProfile(name, phone, address) async {
     try {
-      final user = supabase.auth.currentUser;
+      final session = supabase.auth.currentSession;
+      if (session == null) throw Exception("User not logged in");
+      final String userId = session.user.id;
+
       final updates = {
         'name': name,
         'phone': phone,
         'address': address,
         'updated_at': DateTime.now().toIso8601String(),
       };
-      await supabase.from('profiles').update(updates).eq('id', user!.id);
+      await supabase.from('profiles').update(updates).eq('id', userId);
+
       return true;
     } catch (e) {
       rethrow;
