@@ -6,20 +6,20 @@ import 'package:employee_monitoring_app/ui/screen/monitor/task/monitor_task_deta
 import 'package:flutter/material.dart';
 
 class MonitorHomeActiveTaskPage extends StatefulWidget {
-  const MonitorHomeActiveTaskPage({super.key, required this.title});
+  const MonitorHomeActiveTaskPage({super.key, required this.title, required this.isJoinServer});
 
   final String title;
+  final bool isJoinServer;
 
   @override
   _MonitorHomeActiveTaskPageState createState() => _MonitorHomeActiveTaskPageState();
 }
 
 class _MonitorHomeActiveTaskPageState extends State<MonitorHomeActiveTaskPage> {
-  final bool? isJoinServer = true;
 
   @override
   Widget build(BuildContext context) {
-    return isJoinServer == true
+    return widget.isJoinServer == true
       ? tasks.any((task) => task.status == 'active')
         ? ListView.builder(
           padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -55,13 +55,12 @@ class _MonitorHomeActiveTaskPageState extends State<MonitorHomeActiveTaskPage> {
       onPressed: () {
         EmCreateServerDialog.show(
           context,
-          onConfirm: () {},
-          title: 'Buat Server',
-          content: 'Tulis nama server sesuai yang Anda inginkan',
+          title: 'Buat Grup',
+          content: 'Tulis nama grup sesuai yang Anda inginkan',
         );
       },
-      textAbove: 'Anda belum mempunyai server.',
-      textBelow: 'Buat server terlebih dahulu!',
+      textAbove: 'Anda belum mempunyai grup.',
+      textBelow: 'Buat grup terlebih dahulu!',
       isButton: true,
     );
   }
