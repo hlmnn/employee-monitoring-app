@@ -31,7 +31,7 @@ class AuthUserModel {
   int currentExp;
   int maxExp;
   String address;
-  int serverId;
+  int groupId;
 
   AuthUserModel({
     required this.id,
@@ -43,7 +43,7 @@ class AuthUserModel {
     required this.currentExp,
     required this.maxExp,
     required this.address,
-    required this.serverId,
+    required this.groupId,
   });
 
   factory AuthUserModel.fromJson(Map<String, dynamic> json) {
@@ -57,7 +57,7 @@ class AuthUserModel {
       currentExp: json['current_exp'],
       maxExp: json['max_exp'],
       address: json['address'] ?? '',
-      serverId: json['server_id'] ?? 0,
+      groupId: json['group_id'] ?? 0,
     );
   }
 }
