@@ -24,19 +24,13 @@ class AuthRepository {
   // register with email and password
   Future<bool> register(String name, String phone, String email, String password, bool isMonitor) async {
     try {
-      int level = 1;
-      int currentExp = 0;
-      int maxExp = 100;
       final response = await supabase.auth.signUp(
         email: email,
         password: password,
         data: {
           'name': name,
           'phone': phone,
-          'is_monitor': isMonitor,
-          'level': level,
-          'current_exp': currentExp,
-          'max_exp': maxExp
+          'is_monitor': isMonitor
         },
         emailRedirectTo: null, // prevents automatic login
       );
