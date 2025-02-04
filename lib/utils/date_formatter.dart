@@ -9,7 +9,7 @@ class DateFormatter {
 
   static String convertToString(DateTime? paramDate) {
     if (paramDate == null) return '';
-    String formattedDate = DateFormat('d MMM yyyy').format(paramDate);
+    String formattedDate = DateFormat('dd/MM/yyyy').format(paramDate);
     return formattedDate;
   }
 }
