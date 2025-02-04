@@ -92,6 +92,12 @@ class GroupRepository {
       final session = supabase.auth.currentSession;
       if (session == null) throw Exception("User not logged in");
 
+      final userResponse = await supabase.from('profiles').select('group_id').eq('id', userId).single();
+      final int? groupId = userResponse['group_id'];
+      if (groupId == null) {
+        throw Exception("User is not part of any group");
+      }
+
       final updates = {
         'group_id': null,
         'updated_at': DateTime.now().toIso8601String(),
