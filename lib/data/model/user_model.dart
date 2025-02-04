@@ -70,3 +70,26 @@ class AuthUserModel {
     );
   }
 }
+
+class UserCardModel {
+  String id;
+  String name;
+  int level;
+  bool isMonitor;
+
+  UserCardModel({
+    required this.id,
+    required this.name,
+    required this.level,
+    required this.isMonitor,
+  });
+
+  factory UserCardModel.fromJson(Map<String, dynamic> json) {
+    return UserCardModel(
+      id: json['id'],
+      name: json['name'],
+      level: json['level'],
+      isMonitor: json['is_monitor'],
+    );
+  }
+}
