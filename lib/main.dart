@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:employee_monitoring_app/choose_login_as_page.dart';
+import 'package:employee_monitoring_app/ui/cubit/edit_group_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/group_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/edit_profile_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/home_cubit.dart';
+import 'package:employee_monitoring_app/ui/cubit/leaderboard_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/login_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/profile_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/register_cubit.dart';
@@ -60,6 +62,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<GroupCubit>(
           create: (context) => GroupCubit(),
+        ),
+        BlocProvider<EditGroupCubit>(
+          create: (context) => EditGroupCubit(),
+        ),
+        BlocProvider<LeaderboardCubit>(
+          create: (context) => LeaderboardCubit(),
         ),
       ],
       child: MaterialApp(
