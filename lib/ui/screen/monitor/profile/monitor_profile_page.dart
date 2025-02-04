@@ -74,8 +74,6 @@ class _MonitorProfilePageState extends State<MonitorProfilePage> {
               currentExp = state.data.currentExp;
               maxExp = state.data.maxExp;
               state.data.isMonitor == true ? role = 'Monitor' : role = 'Member';
-
-              // context.read<ProfileCubit>().calculateExp(int.parse(maxExp), int.parse(currentExp), int.parse(maxExp));
             }
           }
           return SingleChildScrollView(
