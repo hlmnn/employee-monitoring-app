@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:employee_monitoring_app/choose_login_as_page.dart';
+import 'package:employee_monitoring_app/ui/cubit/create_task_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/edit_group_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/group_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/edit_profile_cubit.dart';
@@ -10,6 +11,7 @@ import 'package:employee_monitoring_app/ui/cubit/login_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/profile_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/register_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/splash_cubit.dart';
+import 'package:employee_monitoring_app/ui/cubit/task_cubit.dart';
 import 'package:employee_monitoring_app/ui/screen/member/member_navigation.dart';
 import 'package:employee_monitoring_app/ui/screen/monitor/monitor_navigation.dart';
 import 'package:flutter/material.dart';
@@ -68,6 +70,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<LeaderboardCubit>(
           create: (context) => LeaderboardCubit(),
+        ),
+        BlocProvider<TaskCubit>(
+          create: (context) => TaskCubit(),
+        ),
+        BlocProvider<CreateTaskCubit>(
+          create: (context) => CreateTaskCubit(),
         ),
       ],
       child: MaterialApp(
