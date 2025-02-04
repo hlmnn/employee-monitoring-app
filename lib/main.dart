@@ -116,33 +116,20 @@ class _SplashScreenState extends State<SplashScreen> {
           Future.delayed(const Duration(seconds: 4), () {
             if (!mounted) return;
             if (state is SuccessState) {
-              print(state.data);
-              if (state.data != null) {
-                if (state.data == true) {
-                  context.read<SplashCubit>().resetState();
-                  if (mounted) {
-                    Navigator.pushReplacement(
-                      context, MaterialPageRoute(
-                        builder: (context) => const MonitorNavigation(title: 'Monitor Navigation')),
-                    );
-                  }
-                } else {
-                  context.read<SplashCubit>().resetState();
-                  if (mounted) {
-                    Navigator.pushReplacement(
-                      context, MaterialPageRoute(
-                        builder: (context) => const MemberNavigation(title: 'Member Navigation')),
-                    );
-                  }
-                }
-              } else {
-                context.read<SplashCubit>().resetState();
-                if (mounted) {
-                  Navigator.pushReplacement(
-                    context, MaterialPageRoute(
-                      builder: (context) => const ChooseLoginAsPage(title: 'Choose Login As')),
-                  );
-                }
+              print('session: ${state.data}');
+              if (mounted) {
+                Navigator.pushReplacement(
+                  context, MaterialPageRoute(
+                    builder: (context) {
+                      if (state.data == true) {
+                        return const MonitorNavigation(title: 'Monitor Navigation');
+                      } else if (state.data == false) {
+                        return const MemberNavigation(title: 'Member Navigation');
+                      }
+                      return const ChooseLoginAsPage(title: 'Choose Login As');
+                    }
+                  ),
+                );
               }
             }
           });
