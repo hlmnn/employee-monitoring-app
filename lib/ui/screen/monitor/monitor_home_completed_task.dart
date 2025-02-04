@@ -1,4 +1,4 @@
-import 'package:employee_monitoring_app/component/em_alert_dialog/em_create_server_dialog.dart';
+import 'package:employee_monitoring_app/component/em_alert_dialog/em_create_group_dialog.dart';
 import 'package:employee_monitoring_app/component/em_card/em_card.dart';
 import 'package:employee_monitoring_app/component/em_error.dart';
 import 'package:employee_monitoring_app/data/model/task_model.dart';
@@ -53,7 +53,7 @@ class _MonitorHomeCompletedTaskPageState extends State<MonitorHomeCompletedTaskP
         )
       : EmError(
       onPressed: () {
-        EmCreateServerDialog.show(
+        EmCreateGroupDialog.show(
           context,
           title: 'Buat Grup',
           content: 'Tulis nama grup sesuai yang Anda inginkan',
