@@ -232,8 +232,17 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     EmButton.elevated(
                       onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          if (isChecked) {
+                        if (!isChecked) {
+                          Flushbar(
+                            message: 'Silahkan menyetujui Syarat & Ketentuan yang berlaku terlebih dahulu!',
+                            flushbarPosition: FlushbarPosition.BOTTOM,
+                            margin: const EdgeInsets.all(8),
+                            borderRadius: BorderRadius.circular(10),
+                            duration: const Duration(seconds: 3),
+                            isDismissible: false,
+                          ).show(context);
+                        }
+                        if (_formKey.currentState!.validate() && isChecked) {
                             context.read<RegisterCubit>().register(
                               _name.value.text,
                               _phone.value.text,
@@ -241,35 +250,17 @@ class _RegisterPageState extends State<RegisterPage> {
                               _password.value.text,
                               widget.isMonitor,
                             );
-                            if (state is ErrorState) {
-                              Flushbar(
-                                message: state.message,
-                                flushbarPosition: FlushbarPosition.BOTTOM,
-                                margin: const EdgeInsets.all(8),
-                                borderRadius: BorderRadius.circular(10),
-                                duration: const Duration(seconds: 3),
-                                isDismissible: false,
-                              ).show(context);
-                            }
-                          } else {
-                            Flushbar(
-                              message: 'Silahkan menyetujui Syarat & Ketentuan yang berlaku terlebih dahulu!',
-                              flushbarPosition: FlushbarPosition.BOTTOM,
-                              margin: const EdgeInsets.all(8),
-                              borderRadius: BorderRadius.circular(10),
-                              duration: const Duration(seconds: 3),
-                              isDismissible: false,
-                            ).show(context);
-                          }
-                        } else {
+                        }
+                        if (state is ErrorState) {
                           Flushbar(
-                            message: 'Mohon isi form dengan lengkap!',
+                            message: state.message,
                             flushbarPosition: FlushbarPosition.BOTTOM,
                             margin: const EdgeInsets.all(8),
                             borderRadius: BorderRadius.circular(10),
                             duration: const Duration(seconds: 3),
                             isDismissible: false,
                           ).show(context);
+                          context.read<RegisterCubit>().resetState();
                         }
                       },
                       style: ElevatedButton.styleFrom(
