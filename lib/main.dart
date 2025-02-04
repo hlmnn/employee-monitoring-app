@@ -12,6 +12,7 @@ import 'package:employee_monitoring_app/ui/cubit/profile_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/register_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/splash_cubit.dart';
 import 'package:employee_monitoring_app/ui/cubit/task_cubit.dart';
+import 'package:employee_monitoring_app/ui/cubit/task_list_cubit.dart';
 import 'package:employee_monitoring_app/ui/screen/member/member_navigation.dart';
 import 'package:employee_monitoring_app/ui/screen/monitor/monitor_navigation.dart';
 import 'package:flutter/material.dart';
@@ -73,6 +74,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<TaskCubit>(
           create: (context) => TaskCubit(),
+        ),
+        BlocProvider<TaskListCubit>(
+          create: (context) => TaskListCubit(),
         ),
         BlocProvider<CreateTaskCubit>(
           create: (context) => CreateTaskCubit(),
