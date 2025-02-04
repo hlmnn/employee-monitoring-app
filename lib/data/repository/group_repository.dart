@@ -29,6 +29,27 @@ class GroupRepository {
     }
   }
 
+  Future<bool> editGroup(String name) async {
+    try {
+      final session = supabase.auth.currentSession;
+      if (session == null) throw Exception("User not logged in");
+      final String userId = session.user.id;
+      
+      final userResponse = await supabase.from('profiles').select('group_id').eq('id', userId).single();
+      final int groupId = userResponse['group_id'];
+
+      final updates = {
+        'name': name,
+        'updated_at': DateTime.now().toIso8601String(),
+      };
+      await supabase.from('groups').update(updates).eq('id', groupId);
+      
+      return true;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<GroupModel> getGroupDetail() async {
     try {
       final session = supabase.auth.currentSession;
@@ -78,6 +99,26 @@ class GroupRepository {
       await supabase.from('profiles').update(updates).eq('id', userId);
 
       return true;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<AuthUserModel>> geLeaderboard() async {
+    try {
+      final session = supabase.auth.currentSession;
+      if (session == null) throw Exception("User not logged in");
+      final String userId = session.user.id;
+
+      final userResponse = await supabase.from('profiles').select('group_id').eq('id', userId).single();
+      final int groupId = userResponse['group_id'];
+
+      final groupUserResponse = await supabase.from('profiles').select().eq('group_id', groupId).eq('is_monitor', false).order('task_completed_month', ascending: false);
+      final List<AuthUserModel> data = groupUserResponse.map<AuthUserModel>((json) {
+        return AuthUserModel.fromJson(json);
+      }).toList();
+
+      return data;
     } catch (e) {
       rethrow;
     }
