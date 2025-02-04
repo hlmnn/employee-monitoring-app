@@ -27,6 +27,7 @@ class AuthUserModel {
   String phone;
   String email;
   bool isMonitor;
+  int cash;
   int level;
   int currentExp;
   int maxExp;
@@ -41,6 +42,7 @@ class AuthUserModel {
     required this.phone,
     required this.email,
     required this.isMonitor,
+    required this.cash,
     required this.level,
     required this.currentExp,
     required this.maxExp,
@@ -57,6 +59,7 @@ class AuthUserModel {
       phone: json['phone'],
       email: json['email'],
       isMonitor: json['is_monitor'],
+      cash: json['cash'],
       level: json['level'],
       currentExp: json['current_exp'],
       maxExp: json['max_exp'],
