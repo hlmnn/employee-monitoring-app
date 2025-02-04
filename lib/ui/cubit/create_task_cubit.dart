@@ -35,6 +35,19 @@ class CreateTaskCubit extends Cubit<DataState> {
     }
   }
 
+  void deleteTask(int taskId) async {
+    try{
+      emit(LoadingState());
+      final data = await repository.deleteTask(taskId);
+      emit(SuccessState<bool>(data));
+    } on PostgrestException catch (e) {
+      emit(ErrorState(e.message));
+    } catch (e) {
+      emit(ErrorState(e.toString()));
+      rethrow;
+    }
+  }
+
   void getMemberList() async {
     try{
       emit(LoadingState());

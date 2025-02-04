@@ -56,6 +56,19 @@ class TaskRepository {
     }
   }
 
+  Future<bool> deleteTask(taskId) async {
+    try {
+      final session = supabase.auth.currentSession;
+      if (session == null) throw Exception("User not logged in");
+
+      await supabase.from('tasks').delete().eq('id', taskId);
+
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Future<List<TaskCardModel>> getTaskActive() async {
     try {
       final session = supabase.auth.currentSession;
