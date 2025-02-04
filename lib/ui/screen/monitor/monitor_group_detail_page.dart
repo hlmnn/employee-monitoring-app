@@ -1,6 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
-import 'package:employee_monitoring_app/component/em_alert_dialog.dart';
-import 'package:employee_monitoring_app/component/em_alert_dialog/em_create_group_dialog.dart';
+import 'package:employee_monitoring_app/component/em_alert_dialog/em_edit_group_dialog.dart';
+import 'package:employee_monitoring_app/component/em_alert_dialog/em_remove_group_user_dialog.dart';
 import 'package:employee_monitoring_app/component/em_card/em_card.dart';
 import 'package:employee_monitoring_app/component/em_circular_loading.dart';
 import 'package:employee_monitoring_app/data/data_state.dart';
@@ -65,7 +65,7 @@ class _MonitorGroupDetailPageState extends State<MonitorGroupDetailPage> {
                     icon: const Icon(Icons.edit, color: Colors.black),
                     tooltip: 'Edit Group',
                     onPressed: () {
-                      EmCreateGroupDialog.show(
+                      EmEditGroupDialog.show(
                         context,
                         title: 'Edit Server',
                         content: 'Edit nama server sesuai yang Anda inginkan',
@@ -138,7 +138,7 @@ class _MonitorGroupDetailPageState extends State<MonitorGroupDetailPage> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const Text('Member'),
+                              const Text('Anggota'),
                               Text('$memberCount',
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -167,40 +167,8 @@ class _MonitorGroupDetailPageState extends State<MonitorGroupDetailPage> {
                   role: members[index].isMonitor == true ? 'Monitor' : 'Member',
                   level: '${members[index].level}',
                   onPressedButton: (){
-                    EmAlertDialog.show(context,
-                      onConfirm: () {
-                        BlocBuilder<GroupCubit, DataState>(
-                          builder: (context, state) {
-                            context.read<GroupCubit>().removeUserFromGroup(members[index].id);
-                            if (state is ErrorState) {
-                              Flushbar(
-                                message: state.message,
-                                flushbarPosition: FlushbarPosition.BOTTOM,
-                                margin: const EdgeInsets.all(8),
-                                borderRadius: BorderRadius.circular(10),
-                                duration: const Duration(seconds: 3),
-                                isDismissible: false,
-                              ).show(context);
-                              context.read<GroupCubit>().resetState();
-                            } else if (state is SuccessState) {
-                              Flushbar(
-                                message: 'Profile berhasil diubah!',
-                                flushbarPosition: FlushbarPosition.BOTTOM,
-                                margin: const EdgeInsets.all(8),
-                                borderRadius: BorderRadius.circular(10),
-                                duration: const Duration(seconds: 3),
-                                isDismissible: false,
-                              ).show(context);
-                              Future.delayed(const Duration(seconds: 1), () {
-                                BlocProvider.of<GroupCubit>(context).getGroupDetail();
-                                Navigator.pop(context);
-                              });
-                              context.read<GroupCubit>().resetState();
-                            }
-                            return const SizedBox.shrink();
-                          }
-                        );
-                      },
+                    EmRemoveGroupUserDialog.show(context,
+                      userId: members[index].id,
                       title: 'Peringatan!',
                       content: 'Member yang dipilih akan Anda keluarkan. Apakah Anda yakin ingin mengeluarkan member ini?',
                     );
