@@ -4,7 +4,7 @@ import 'package:employee_monitoring_app/component/em_circular_loading.dart';
 import 'package:employee_monitoring_app/component/em_error.dart';
 import 'package:employee_monitoring_app/data/data_state.dart';
 import 'package:employee_monitoring_app/data/model/task_model.dart';
-import 'package:employee_monitoring_app/ui/cubit/task_cubit.dart';
+import 'package:employee_monitoring_app/ui/cubit/task_list_cubit.dart';
 import 'package:employee_monitoring_app/ui/screen/monitor/task/monitor_task_detail_page.dart';
 import 'package:employee_monitoring_app/utils/date_formatter.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,7 @@ class _MonitorHomeActiveTaskPageState extends State<MonitorHomeActiveTaskPage> {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<TaskCubit>(context).getTaskActive();
+    BlocProvider.of<TaskListCubit>(context).getTaskActive();
 
     if (widget.isJoinServer == false) {
       return EmError(
@@ -41,7 +41,7 @@ class _MonitorHomeActiveTaskPageState extends State<MonitorHomeActiveTaskPage> {
       );
     }
 
-    return BlocBuilder<TaskCubit, DataState>(
+    return BlocBuilder<TaskListCubit, DataState>(
       builder: (context, state) {
         List<TaskCardModel> tasks = [];
         if (state is LoadingState) {
