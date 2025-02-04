@@ -32,6 +32,8 @@ class AuthUserModel {
   int maxExp;
   String address;
   int groupId;
+  int taskCompleted;
+  int taskCompletedMonth;
 
   AuthUserModel({
     required this.id,
@@ -44,6 +46,8 @@ class AuthUserModel {
     required this.maxExp,
     required this.address,
     required this.groupId,
+    required this.taskCompleted,
+    required this.taskCompletedMonth,
   });
 
   factory AuthUserModel.fromJson(Map<String, dynamic> json) {
@@ -58,6 +62,8 @@ class AuthUserModel {
       maxExp: json['max_exp'],
       address: json['address'] ?? '',
       groupId: json['group_id'] ?? 0,
+      taskCompleted: json['task_completed'],
+      taskCompletedMonth: json['task_completed_month']
     );
   }
 }
