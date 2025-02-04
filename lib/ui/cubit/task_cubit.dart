@@ -9,32 +9,6 @@ class TaskCubit extends Cubit<DataState> {
 
   TaskCubit() : super(InitialState());
 
-  void getTaskActive() async {
-    try{
-      emit(LoadingState());
-      final data = await repository.getTaskActive();
-      emit(SuccessState<List<TaskCardModel>>(data));
-    } on PostgrestException catch (e) {
-      emit(ErrorState(e.message));
-    } catch (e) {
-      emit(ErrorState(e.toString()));
-      rethrow;
-    }
-  }
-
-  void getTaskCompleted() async {
-    try{
-      emit(LoadingState());
-      final data = await repository.getTaskCompleted();
-      emit(SuccessState<List<TaskCardModel>>(data));
-    } on PostgrestException catch (e) {
-      emit(ErrorState(e.message));
-    } catch (e) {
-      emit(ErrorState(e.toString()));
-      rethrow;
-    }
-  }
-
   void getTaskDetail(int taskId) async {
     try{
       emit(LoadingState());
