@@ -31,12 +31,12 @@ class AuthRepository {
           'name': name,
           'phone': phone,
           'is_monitor': isMonitor
-        },
-        emailRedirectTo: null, // prevents automatic login
+        }
       );
       if (response.user == null) {
-        return false; // register failed
+        return false;
       }
+      await supabase.auth.signOut();
       return true;
     } catch (e) {
       rethrow;
