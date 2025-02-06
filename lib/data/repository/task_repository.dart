@@ -128,12 +128,28 @@ class TaskRepository {
       final userResponse = await supabase.from('profiles').select('group_id').eq('id', userId).single();
       final int groupId = userResponse['group_id'];
 
-      final taskResponse = await supabase.from('tasks')
-        .select('*, assigned_to(id, name, level, is_monitor)')
-        .eq('id', taskId)
-        .eq('group_id', groupId)
-        .single();
-      final data = TaskModel.fromJson(taskResponse);
+      final taskResponse = await supabase.from('tasks').select().eq('id', taskId).eq('group_id', groupId).single();
+      final taskData = TaskModel.fromJson(taskResponse);
+
+      final memberResponse = await supabase.from('profiles').select('id, name, level, is_monitor').eq('id', taskData.assignedTo).single();
+      final member = UserCardModel.fromJson(memberResponse);
+
+      final data = TaskModel(
+          id: taskData.id,
+          title: taskData.title,
+          description: taskData.description,
+          reward: taskData.reward,
+          experience: taskData.experience,
+          startDate: taskData.startDate,
+          dueDate: taskData.dueDate,
+          groupId: taskData.groupId,
+          assignedTo: taskData.assignedTo,
+          assignedBy: taskData.assignedBy,
+          isActive: taskData.isActive,
+          resultReport: taskData.resultReport,
+          resultFile: taskData.resultFile,
+          memberCard: member
+      );
 
       return data;
     } catch (e) {
