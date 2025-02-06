@@ -86,9 +86,8 @@ class _LeaderboardPageState extends State<LeaderboardPage>{
                       return EmCard.leaderboard(
                         onTap: () {
                           Navigator.push(context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                              const MonitorMemberDetailPage(title: 'Detail Member'),
+                            MaterialPageRoute(builder: (context) =>
+                              MonitorMemberDetailPage(title: 'Detail Member', memberId: members[index].id),
                             ),
                           );
                         },
