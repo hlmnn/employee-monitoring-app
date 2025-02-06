@@ -14,3 +14,5 @@ The pages in this application are as follows:
 - Leaderbord (member progress)
 - Group Detail (group information, member list)
 - Member Detail (member information, list of tasks for that member)
+
+This app is also developed with [Supabase](https://supabase.com/) for Auth, Database, and Storage.
