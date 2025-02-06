@@ -105,11 +105,12 @@ class TaskModel {
   DateTime startDate;
   DateTime dueDate;
   int groupId;
+  String assignedTo;
   String assignedBy;
   bool isActive;
   String resultReport;
   String resultFile;
-  UserCardModel? member;
+  UserCardModel? memberCard;
 
   TaskModel({
     required this.id,
@@ -120,11 +121,12 @@ class TaskModel {
     required this.startDate,
     required this.dueDate,
     required this.groupId,
+    required this.assignedTo,
     required this.assignedBy,
     required this.isActive,
     required this.resultReport,
     required this.resultFile,
-    this.member,
+    this.memberCard,
   });
 
   factory TaskModel.fromJson(Map<String, dynamic> json) {
@@ -137,13 +139,12 @@ class TaskModel {
       startDate: DateTime.parse(json['start_date']),
       dueDate: DateTime.parse(json['due_date']),
       groupId: json['group_id'],
-      member: json['assigned_to'] != null
-          ? UserCardModel.fromJson(json['assigned_to'])
-          : null,
+      assignedTo: json['assigned_to'],
       assignedBy: json['assigned_by'],
       isActive: json['is_active'],
       resultReport: json['result_report'] ?? '',
       resultFile: json['result_file'] ?? '',
+      memberCard: json['member'] != null ? UserCardModel.fromJson(json['member']) : null,
     );
   }
 }
@@ -172,9 +173,7 @@ class TaskCardModel {
       reward: json['reward'],
       experience: json['experience'],
       dueDate: DateTime.parse(json['due_date']),
-      member: json['assigned_to'] != null
-          ? UserCardModel.fromJson(json['assigned_to'])
-          : null,
+      member: json['assigned_to'] != null ? UserCardModel.fromJson(json['assigned_to']) : null,
     );
   }
 }
