@@ -1,4 +1,5 @@
 import 'package:employee_monitoring_app/data/data_state.dart';
+import 'package:employee_monitoring_app/data/model/task_model.dart';
 import 'package:employee_monitoring_app/data/model/user_model.dart';
 import 'package:employee_monitoring_app/data/repository/task_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,6 +41,19 @@ class CreateTaskCubit extends Cubit<DataState> {
       emit(LoadingState());
       final data = await repository.deleteTask(taskId);
       emit(SuccessState<bool>(data));
+    } on PostgrestException catch (e) {
+      emit(ErrorState(e.message));
+    } catch (e) {
+      emit(ErrorState(e.toString()));
+      rethrow;
+    }
+  }
+
+  void getTaskEditDetail(int taskId) async {
+    try{
+      emit(LoadingState());
+      final data = await repository.getTaskEditDetail(taskId);
+      emit(SuccessState<TaskModel>(data));
     } on PostgrestException catch (e) {
       emit(ErrorState(e.message));
     } catch (e) {
