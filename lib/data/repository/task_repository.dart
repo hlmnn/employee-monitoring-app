@@ -126,6 +126,7 @@ class TaskRepository {
       final String userId = session.user.id;
 
       final userResponse = await supabase.from('profiles').select('group_id').eq('id', userId).single();
+      if (userResponse['group_id'] == null) throw Exception("User not joined in group!");
       final int groupId = userResponse['group_id'];
 
       final taskResponse = await supabase.from('tasks')
@@ -151,6 +152,7 @@ class TaskRepository {
       final String userId = session.user.id;
 
       final userResponse = await supabase.from('profiles').select('group_id').eq('id', userId).single();
+      if (userResponse['group_id'] == null) throw Exception("User not joined in group!");
       final int groupId = userResponse['group_id'];
 
       final taskResponse = await supabase.from('tasks')
