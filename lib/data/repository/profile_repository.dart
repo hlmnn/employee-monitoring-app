@@ -82,8 +82,6 @@ class ProfileRepository {
         tasks: tasks
       );
 
-      print(data.tasks);
-
       return data;
     } catch (e) {
       rethrow;
