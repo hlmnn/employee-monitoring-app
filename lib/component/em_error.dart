@@ -7,12 +7,14 @@ class EmError extends StatelessWidget{
     required this.onPressed,
     required this.textAbove,
     required this.textBelow,
+    this.textButton = 'Buat Grup',
     this.isButton = false,
   }) : super(key: key);
 
   final GestureTapCallback onPressed;
   final String textAbove;
   final String textBelow;
+  final String textButton;
   final bool? isButton;
 
   @override
@@ -45,7 +47,7 @@ class EmError extends StatelessWidget{
                 backgroundColor: const Color(0xffFFBD20),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               ),
-              text: 'Buat Server',
+              text: textButton,
               textStyle: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 17,
