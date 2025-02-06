@@ -9,10 +9,23 @@ class GroupCubit extends Cubit<DataState> {
 
   GroupCubit() : super(InitialState());
 
-  void createGroup(name) async {
+  void createGroup(String name) async {
     try{
       emit(LoadingState());
       final data = await repository.createGroup(name);
+      emit(SuccessState<bool>(data));
+    } on PostgrestException catch (e) {
+      emit(ErrorState(e.message));
+    } catch (e) {
+      emit(ErrorState(e.toString()));
+      rethrow;
+    }
+  }
+
+  void joinGroup(String code) async {
+    try{
+      emit(LoadingState());
+      final data = await repository.joinGroup(code);
       emit(SuccessState<bool>(data));
     } on PostgrestException catch (e) {
       emit(ErrorState(e.message));
@@ -35,10 +48,23 @@ class GroupCubit extends Cubit<DataState> {
     }
   }
 
-  void removeUserFromGroup(userId) async {
+  void removeUserFromGroup(String userId) async {
     try{
       emit(LoadingState());
       final data = await repository.removeUserFromGroup(userId);
+      emit(SuccessState<bool>(data));
+    } on PostgrestException catch (e) {
+      emit(ErrorState(e.message));
+    } catch (e) {
+      emit(ErrorState(e.toString()));
+      rethrow;
+    }
+  }
+
+  void leaveGroup() async {
+    try{
+      emit(LoadingState());
+      final data = await repository.leaveGroup();
       emit(SuccessState<bool>(data));
     } on PostgrestException catch (e) {
       emit(ErrorState(e.message));

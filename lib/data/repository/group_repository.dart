@@ -29,6 +29,23 @@ class GroupRepository {
     }
   }
 
+  Future<bool> joinGroup(String code) async {
+    try {
+      final session = supabase.auth.currentSession;
+      if (session == null) throw Exception("User not logged in");
+      final String userId = session.user.id;
+
+      final response = await supabase.from('groups').select('id').eq('group_code', code).single();
+      if (response['id'] == null) throw Exception("Group not found!");
+      final int groupId = response['id'];
+
+      await supabase.from('profiles').update({'group_id': groupId}).eq('id', userId);
+      return true;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<bool> editGroup(String name) async {
     try {
       final session = supabase.auth.currentSession;
@@ -97,6 +114,28 @@ class GroupRepository {
       if (groupId == null) {
         throw Exception("User is not part of any group");
       }
+
+      final updates = {
+        'group_id': null,
+        'updated_at': DateTime.now().toIso8601String(),
+      };
+      await supabase.from('profiles').update(updates).eq('id', userId);
+
+      return true;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<bool> leaveGroup() async {
+    try {
+      final session = supabase.auth.currentSession;
+      if (session == null) throw Exception("User not logged in");
+      final String userId = session.user.id;
+
+      final userResponse = await supabase.from('profiles').select('group_id').eq('id', userId).single();
+      final int? groupId = userResponse['group_id'];
+      if (groupId == null) throw Exception("User is not part of any group");
 
       final updates = {
         'group_id': null,

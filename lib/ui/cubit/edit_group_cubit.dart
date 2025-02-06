@@ -48,6 +48,19 @@ class EditGroupCubit extends Cubit<DataState> {
     }
   }
 
+  void leaveGroup() async {
+    try{
+      emit(LoadingState());
+      final data = await repository.leaveGroup();
+      emit(SuccessState<bool>(data));
+    } on PostgrestException catch (e) {
+      emit(ErrorState(e.message));
+    } catch (e) {
+      emit(ErrorState(e.toString()));
+      rethrow;
+    }
+  }
+
   void resetState() async {
     emit(InitialState());
   }
