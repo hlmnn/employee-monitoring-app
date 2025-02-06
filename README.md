@@ -1,16 +1,16 @@
-# employee_monitoring_app
+## Employee Monitoring App
 
-A new Flutter project.
+Employee Monitor App is an application to monitor employee performance developed using Flutter. This application is made so that supervisors from a company can monitor the performance of their employees' progress. The supervisor can create groups for employees, assign tasks to employees, create rewards, track tasks that have been completed, and more.
 
-## Getting Started
+This application is combined with gamification to make users feel like they are playing a game and keep them interested. Octalysis framework is used to design gamification features that will be in the application. Such as Rankings, Levels, Experiences, Awards, Rewards, Avatars, and more.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The pages in this application are as follows:
+- Splashscreen
+- Choose Login as a Monitor/Member
+- Login & Register
+- Home (list of active or completed tasks, task details, task CRUD)
+- Store (reward list, reward details, reward CRUD)
+- Profile (user information, awards, edit profile, reset password)
+- Leaderbord (member progress)
+- Group Detail (group information, member list)
+- Member Detail (member information, list of tasks for that member)
