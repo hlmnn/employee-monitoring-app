@@ -119,6 +119,56 @@ class TaskRepository {
     }
   }
 
+  Future<List<TaskCardModel>> getTaskActiveMember() async {
+    try {
+      final session = supabase.auth.currentSession;
+      if (session == null) throw Exception("User not logged in");
+      final String userId = session.user.id;
+
+      final userResponse = await supabase.from('profiles').select('group_id').eq('id', userId).single();
+      final int groupId = userResponse['group_id'];
+
+      final taskResponse = await supabase.from('tasks')
+          .select('id, title, reward, experience, due_date, assigned_to(id, name, level, is_monitor)')
+          .eq('group_id', groupId)
+          .eq('is_active', true)
+          .eq('assigned_to', userId)
+          .order('due_date', ascending: true);
+      final List<TaskCardModel> data = taskResponse.map<TaskCardModel>((json) {
+        return TaskCardModel.fromJson(json);
+      }).toList();
+
+      return data;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<TaskCardModel>> getTaskCompletedMember() async {
+    try {
+      final session = supabase.auth.currentSession;
+      if (session == null) throw Exception("User not logged in");
+      final String userId = session.user.id;
+
+      final userResponse = await supabase.from('profiles').select('group_id').eq('id', userId).single();
+      final int groupId = userResponse['group_id'];
+
+      final taskResponse = await supabase.from('tasks')
+          .select('id, title, reward, experience, due_date, assigned_to(id, name, level, is_monitor)')
+          .eq('group_id', groupId)
+          .eq('is_active', false)
+          .eq('assigned_to', userId)
+          .order('due_date', ascending: true);
+      final List<TaskCardModel> data = taskResponse.map<TaskCardModel>((json) {
+        return TaskCardModel.fromJson(json);
+      }).toList();
+
+      return data;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<TaskModel> getTaskDetail(int taskId) async {
     try {
       final session = supabase.auth.currentSession;

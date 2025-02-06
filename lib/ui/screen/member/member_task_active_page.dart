@@ -1,73 +1,90 @@
-import 'package:employee_monitoring_app/component/em_alert_dialog/em_create_server_dialog.dart';
+import 'package:employee_monitoring_app/component/em_alert_dialog.dart';
 import 'package:employee_monitoring_app/component/em_card/em_card.dart';
+import 'package:employee_monitoring_app/component/em_circular_loading.dart';
 import 'package:employee_monitoring_app/component/em_error.dart';
+import 'package:employee_monitoring_app/data/data_state.dart';
 import 'package:employee_monitoring_app/data/model/task_model.dart';
+import 'package:employee_monitoring_app/ui/cubit/task_list_cubit.dart';
 import 'package:employee_monitoring_app/ui/screen/member/member_task_detail_page.dart';
+import 'package:employee_monitoring_app/utils/date_formatter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MemberTaskActivePage extends StatefulWidget {
-  const MemberTaskActivePage({super.key, required this.title});
+  const MemberTaskActivePage({super.key, required this.title, required this.isJoinServer});
 
   final String title;
+  final bool isJoinServer;
 
   @override
   _MemberTaskActivePageState createState() => _MemberTaskActivePageState();
 }
 
 class _MemberTaskActivePageState extends State<MemberTaskActivePage> {
-  final bool? isJoinServer = true;
-
-  Future<void> sortList() async {
-    tasks.sort((a, b) => a.lastDate.compareTo(b.lastDate));
-  }
-
   @override
   Widget build(BuildContext context) {
-    sortList();
-    return isJoinServer == true
-      ? tasks.any((task) => task.status == 'active')
-        ? ListView.builder(
+    BlocProvider.of<TaskListCubit>(context).getTaskActiveMember();
+
+    if (widget.isJoinServer == false) {
+      return EmError(
+        onPressed: () {
+          EmAlertDialog.show(
+            context,
+            title: 'Masuk Grup',
+            content: 'Salin dan tempel kode invite ke kolom dibawah ini, lalu tekan Join untuk bergabung.',
+            onConfirm: () {},
+          );
+        },
+        textAbove: 'Anda belum bergabung dengan grup.',
+        textBelow: 'Masuk grup terlebih dahulu!',
+        isButton: true,
+      );
+    }
+
+    return BlocBuilder<TaskListCubit, DataState>(
+      builder: (context, state) {
+        List<TaskCardModel> tasks = [];
+        if (state is LoadingState) {
+          return const Center(
+              child: EmCircularLoading(size: 30, color: Color(0xffFFBD20))
+          );
+        } else if (state is SuccessState) {
+          tasks = state.data;
+        }
+
+        if (tasks.isEmpty) {
+          return EmError(
+            onPressed: () {},
+            textAbove: 'Anda belum mempunyai tugas aktif.',
+            textBelow: 'Minta monitor buat tugas terlebih dahulu!',
+          );
+        }
+
+        return ListView.builder(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           scrollDirection: Axis.vertical,
           itemCount: tasks.length,
           itemBuilder: (BuildContext context, int index) {
-            if (tasks[index].status != 'active') return const SizedBox.shrink();
             return EmCard.task(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const MemberTaskDetailPage(title: 'Detail Tugas'),
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => MemberTaskDetailPage(title: 'Detail Tugas', taskId: tasks[index].id),
+                //   ),
+                // );
               },
               image: 'assets/images/avatar_placeholder.png',
-              title: '${tasks[index].title} yang ke-${index + 1}',
-              name: tasks[index].member.name,
-              level: tasks[index].member.level,
-              date: tasks[index].lastDate,
-              cash: tasks[index].cash,
-              experience: tasks[index].exp,
+              title: tasks[index].title,
+              name: tasks[index].member?.name ?? 'null',
+              level: '${(tasks[index].member?.level) ?? 0}' ,
+              date: DateFormatter.convertToString(tasks[index].dueDate),
+              cash: '${tasks[index].reward}',
+              experience: '${tasks[index].experience}',
             );
           },
-        )
-        : EmError(
-          onPressed: () {},
-          textAbove: 'Anda belum mempunyai tugas.',
-          textBelow: 'Buat tugas terlebih dahulu!',
-        )
-      : EmError(
-      onPressed: () {
-        EmCreateServerDialog.show(
-          context,
-          onConfirm: () {},
-          title: 'Masuk Server',
-          content: 'Salin dan tempel kode invite ke kolom dibawah ini, lalu klik Join untuk bergabung.',
         );
-      },
-      textAbove: 'Anda belum tergabung dengan server.',
-      textBelow: 'Masuk server terlebih dahulu!',
-      isButton: true,
+      }
     );
   }
 }
