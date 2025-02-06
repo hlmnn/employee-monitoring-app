@@ -1,3 +1,5 @@
+import 'package:employee_monitoring_app/data/model/task_model.dart';
+
 class UserModel {
   int id;
   String name;
@@ -35,6 +37,7 @@ class AuthUserModel {
   int groupId;
   int taskCompleted;
   int taskCompletedMonth;
+  List<TaskCardModel>? tasks;
 
   AuthUserModel({
     required this.id,
@@ -50,6 +53,7 @@ class AuthUserModel {
     required this.groupId,
     required this.taskCompleted,
     required this.taskCompletedMonth,
+    this.tasks,
   });
 
   factory AuthUserModel.fromJson(Map<String, dynamic> json) {
@@ -66,7 +70,10 @@ class AuthUserModel {
       address: json['address'] ?? '',
       groupId: json['group_id'] ?? 0,
       taskCompleted: json['task_completed'],
-      taskCompletedMonth: json['task_completed_month']
+      taskCompletedMonth: json['task_completed_month'],
+      tasks: json['tasks'] != null
+        ? (json['tasks'] as List).map((e) => TaskCardModel.fromJson(e)).toList()
+        : null,
     );
   }
 }

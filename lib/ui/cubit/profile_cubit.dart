@@ -50,16 +50,18 @@ class ProfileCubit extends Cubit<DataState>{
     }
   }
 
-  // Future<void> calculateExp(int level, int currentExp, int maxExp) async {
-  //   int currentTotalExp = currentExp; // example starting experience (level 7)
-  //   int currentMaxExp = maxExp;
-  //
-  //   while (currentTotalExp >= currentMaxExp) {
-  //     currentTotalExp -= maxExp; // subtract maxExp from currentExp
-  //     level++; // increase the level
-  //     currentExp = currentTotalExp + (level - 1) * 50; // recalculate maxExp
-  //   }
-  // }
+  void getMemberDetail(String memberId) async {
+    try{
+      emit(LoadingState());
+      final data = await repository.getMemberDetail(memberId);
+      emit(SuccessState<AuthUserModel>(data));
+    } on PostgrestException catch (e) {
+      emit(ErrorState(e.message));
+    } catch (e) {
+      emit(ErrorState(e.toString()));
+      rethrow;
+    }
+  }
 
   void resetState() async {
     emit(InitialState());
