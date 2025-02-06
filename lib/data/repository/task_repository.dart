@@ -39,7 +39,7 @@ class TaskRepository {
       final userResponse = await supabase.from('profiles').select('group_id').eq('id', userId).single();
       final int groupId = userResponse['group_id'];
 
-      await supabase.from('tasks').update({
+      final updates = {
         'title': title,
         'description': description,
         'reward': reward,
@@ -47,8 +47,10 @@ class TaskRepository {
         'due_date': dueDate.toIso8601String(),
         'group_id': groupId,
         'assigned_to': memberId,
-        'assigned_by': userId
-      }).eq('id', taskId);
+        'assigned_by': userId,
+        'updated_at': DateTime.now().toIso8601String(),
+      };
+      await supabase.from('tasks').update(updates).eq('id', taskId);
 
       return true;
     } catch (e) {
@@ -131,6 +133,24 @@ class TaskRepository {
         .eq('id', taskId)
         .eq('group_id', groupId)
         .single();
+      final data = TaskModel.fromJson(taskResponse);
+
+      return data;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<TaskModel> getTaskEditDetail(int taskId, [bool detail = false]) async {
+    try {
+      final session = supabase.auth.currentSession;
+      if (session == null) throw Exception("User not logged in");
+      final String userId = session.user.id;
+
+      final userResponse = await supabase.from('profiles').select('group_id').eq('id', userId).single();
+      final int groupId = userResponse['group_id'];
+
+      final taskResponse = await supabase.from('tasks').select().eq('id', taskId).eq('group_id', groupId).single();
       final data = TaskModel.fromJson(taskResponse);
 
       return data;
