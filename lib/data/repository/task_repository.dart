@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:employee_monitoring_app/data/model/task_model.dart';
 import 'package:employee_monitoring_app/data/model/user_model.dart';
 import 'package:employee_monitoring_app/main.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class TaskRepository {
 
