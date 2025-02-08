@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:employee_monitoring_app/data/data_state.dart';
 import 'package:employee_monitoring_app/data/model/task_model.dart';
 import 'package:employee_monitoring_app/data/repository/task_repository.dart';
@@ -22,10 +24,10 @@ class TaskCubit extends Cubit<DataState> {
     }
   }
 
-  void updateTaskMember(int taskId, int cash, int experience, String resultReport) async {
+  void updateTaskMember(int taskId, int cash, int experience, String resultReport, String fileName, File file) async {
     try{
       emit(LoadingState());
-      final data = await repository.updateTaskMember(taskId, cash, experience, resultReport);
+      final data = await repository.updateTaskMember(taskId, cash, experience, resultReport, fileName, file);
       emit(SuccessState<bool>(data));
     } on PostgrestException catch (e) {
       emit(ErrorState(e.message));

@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:employee_monitoring_app/data/model/task_model.dart';
 import 'package:employee_monitoring_app/data/model/user_model.dart';
 import 'package:employee_monitoring_app/main.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class TaskRepository {
 
@@ -60,7 +63,7 @@ class TaskRepository {
     }
   }
 
-  Future<bool> updateTaskMember(int taskId, int cash, int experience, String resultReport) async {
+  Future<bool> updateTaskMember(int taskId, int cash, int experience, String resultReport, String fileName, File file) async {
     try {
       final session = supabase.auth.currentSession;
       if (session == null) throw Exception("User not logged in");
@@ -70,7 +73,7 @@ class TaskRepository {
           .select('cash, level, current_exp, max_exp, task_completed, task_completed_month, group_id')
           .eq('id', userId)
           .single();
-      final int? groupId = userResponse['current_exp'];
+      final int? groupId = userResponse['group_id'];
       if (groupId == null) throw Exception("User not joined in group!");
 
       int memberCash = userResponse['cash'];
@@ -80,7 +83,6 @@ class TaskRepository {
       int memberTaskCompleted = userResponse['task_completed'];
       int memberTaskCompletedMonth = userResponse['task_completed_month'];
 
-
       memberCash += cash;
       memberCurrentExp += experience;
       if (memberCurrentExp >= memberMaxExp) {
@@ -88,9 +90,16 @@ class TaskRepository {
         memberMaxExp += 50;
         memberCurrentExp -= memberCurrentExp;
       }
+      final taskStorageResponse = await supabase.storage.from('task_results').upload(
+          'group-$groupId/$fileName',
+          file
+      );
+      if (taskStorageResponse.isEmpty) throw Exception("Failed to upload file!");
+      final String resultFileUrl = supabase.storage.from('task_results').getPublicUrl(fileName);
 
       final taskUpdates = {
         'result_report': resultReport,
+        'result_file': resultFileUrl,
         'is_active': false,
         'updated_at': DateTime.now().toIso8601String(),
       };

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:another_flushbar/flushbar.dart';
 import 'package:employee_monitoring_app/component/em_button/em_button.dart';
 import 'package:employee_monitoring_app/component/em_card/em_card.dart';
@@ -7,6 +9,7 @@ import 'package:employee_monitoring_app/data/model/task_model.dart';
 import 'package:employee_monitoring_app/ui/cubit/task_cubit.dart';
 import 'package:employee_monitoring_app/ui/screen/member/member_navigation.dart';
 import 'package:employee_monitoring_app/utils/date_formatter.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,6 +26,27 @@ class MemberTaskDetailPage extends StatefulWidget {
 class _MemberTaskDetailPageState extends State<MemberTaskDetailPage> {
   final TextEditingController _taskReportDescription = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  FilePickerResult? result;
+  File? fileResult;
+  String? fileName;
+
+  void _pickFile() async {
+    result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+    );
+
+    if (result != null) {
+      fileResult = File(result!.files.single.path!);
+      setState(() {
+        fileName = result!.files.single.name;
+      });
+    } else {
+      throw Exception("No file selected!");
+    }
+  }
+
+  void _downloadFile() async {}
 
   @override
   void dispose() {
@@ -84,11 +108,13 @@ class _MemberTaskDetailPageState extends State<MemberTaskDetailPage> {
               memberName = state.data.memberCard?.name ?? '';
               state.data.memberCard?.isMonitor == true ? memberRole = 'Monitor' : memberRole = 'Member';
               memberLevel = state.data.memberCard?.level ?? 0;
-              _taskReportDescription.text = state.data.resultReport;
               isActive = state.data.isActive;
-            } else {
+              if (_taskReportDescription.text.isEmpty) {
+                _taskReportDescription.text = state.data.resultReport;
+              }
+            } else if (state.data is bool) {
+              context.read<TaskCubit>().resetState();
               Future.delayed(Duration.zero, () {
-                context.read<TaskCubit>().resetState();
                 if (context.mounted) {
                   Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
@@ -209,15 +235,17 @@ class _MemberTaskDetailPageState extends State<MemberTaskDetailPage> {
                           ),
                         ),
                         child: ListTile(
-                          onTap: () {},
-                          title: const Text('Pilih file...',
-                            style: TextStyle(
+                          onTap: () {
+                            isActive == true ? _pickFile() : _downloadFile();
+                          },
+                          title: Text(fileName ?? 'Pilih file...',
+                            style: const TextStyle(
                               fontSize: 15,
                               color: Colors.black54,
                             ),
                             overflow: TextOverflow.ellipsis,
                           ),
-                          trailing: const Icon(Icons.upload),
+                          trailing: Icon(isActive == true ? Icons.upload : Icons.download),
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -272,12 +300,25 @@ class _MemberTaskDetailPageState extends State<MemberTaskDetailPage> {
                       padding: const EdgeInsets.all(20),
                       child: EmButton.elevated(
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
+                          if (fileResult == null) {
+                            Flushbar(
+                              message: 'Mohon upload File Bukti!',
+                              flushbarPosition: FlushbarPosition.BOTTOM,
+                              margin: const EdgeInsets.all(8),
+                              borderRadius: BorderRadius.circular(10),
+                              duration: const Duration(seconds: 1),
+                              isDismissible: false,
+                            ).show(context);
+                          }
+
+                          if (_formKey.currentState!.validate() && (fileResult != null)) {
                             context.read<TaskCubit>().updateTaskMember(
                               widget.taskId,
                               reward,
                               experience,
                               _taskReportDescription.text.trim(),
+                              fileName!.replaceAll(' ', '-'),
+                              fileResult!,
                             );
                           }
                           if (state is ErrorState) {
