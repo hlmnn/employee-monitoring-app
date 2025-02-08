@@ -60,6 +60,59 @@ class TaskRepository {
     }
   }
 
+  Future<bool> updateTaskMember(int taskId, int cash, int experience, String resultReport) async {
+    try {
+      final session = supabase.auth.currentSession;
+      if (session == null) throw Exception("User not logged in");
+      final String userId = session.user.id;
+
+      final userResponse = await supabase.from('profiles')
+          .select('cash, level, current_exp, max_exp, task_completed, task_completed_month, group_id')
+          .eq('id', userId)
+          .single();
+      final int? groupId = userResponse['current_exp'];
+      if (groupId == null) throw Exception("User not joined in group!");
+
+      int memberCash = userResponse['cash'];
+      int memberLevel = userResponse['level'];
+      int memberCurrentExp = userResponse['current_exp'];
+      int memberMaxExp = userResponse['max_exp'];
+      int memberTaskCompleted = userResponse['task_completed'];
+      int memberTaskCompletedMonth = userResponse['task_completed_month'];
+
+
+      memberCash += cash;
+      memberCurrentExp += experience;
+      if (memberCurrentExp >= memberMaxExp) {
+        memberLevel++;
+        memberMaxExp += 50;
+        memberCurrentExp -= memberCurrentExp;
+      }
+
+      final taskUpdates = {
+        'result_report': resultReport,
+        'is_active': false,
+        'updated_at': DateTime.now().toIso8601String(),
+      };
+      await supabase.from('tasks').update(taskUpdates).eq('id', taskId);
+
+      final memberUpdates = {
+        'cash': memberCash,
+        'level': memberLevel,
+        'current_exp': memberCurrentExp,
+        'max_exp': memberMaxExp,
+        'task_completed': memberTaskCompleted + 1,
+        'task_completed_month': memberTaskCompletedMonth + 1,
+        'updated_at': DateTime.now().toIso8601String(),
+      };
+      await supabase.from('profiles').update(memberUpdates).eq('id', userId);
+
+      return true;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<bool> deleteTask(taskId) async {
     try {
       final session = supabase.auth.currentSession;

@@ -22,6 +22,19 @@ class TaskCubit extends Cubit<DataState> {
     }
   }
 
+  void updateTaskMember(int taskId, int cash, int experience, String resultReport) async {
+    try{
+      emit(LoadingState());
+      final data = await repository.updateTaskMember(taskId, cash, experience, resultReport);
+      emit(SuccessState<bool>(data));
+    } on PostgrestException catch (e) {
+      emit(ErrorState(e.message));
+    } catch (e) {
+      emit(ErrorState(e.toString()));
+      rethrow;
+    }
+  }
+
   void resetState() async {
     emit(InitialState());
   }
