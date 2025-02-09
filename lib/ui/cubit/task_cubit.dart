@@ -18,6 +18,8 @@ class TaskCubit extends Cubit<DataState> {
       emit(SuccessState<TaskModel>(data));
     } on PostgrestException catch (e) {
       emit(ErrorState(e.message));
+    } on StorageException catch (e) {
+      emit(ErrorState(e.message));
     } catch (e) {
       emit(ErrorState(e.toString()));
       rethrow;
@@ -29,6 +31,21 @@ class TaskCubit extends Cubit<DataState> {
       emit(LoadingState());
       final data = await repository.updateTaskMember(taskId, cash, experience, resultReport, fileName, file);
       emit(SuccessState<bool>(data));
+    } on PostgrestException catch (e) {
+      emit(ErrorState(e.message));
+    } on StorageException catch (e) {
+      emit(ErrorState(e.message));
+    } catch (e) {
+      emit(ErrorState(e.toString()));
+      rethrow;
+    }
+  }
+
+  void downloadTask(String fileName) async {
+    try{
+      emit(LoadingState());
+      final data = await repository.downloadTask(fileName);
+      emit(SuccessState<File>(data));
     } on PostgrestException catch (e) {
       emit(ErrorState(e.message));
     } catch (e) {

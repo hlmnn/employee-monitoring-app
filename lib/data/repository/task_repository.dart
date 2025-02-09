@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:employee_monitoring_app/data/model/task_model.dart';
 import 'package:employee_monitoring_app/data/model/user_model.dart';
 import 'package:employee_monitoring_app/main.dart';
+import 'package:employee_monitoring_app/utils/file_storage.dart';
 
 class TaskRepository {
 
@@ -131,6 +132,27 @@ class TaskRepository {
       return true;
     } catch (e) {
       return false;
+    }
+  }
+
+  Future<File> downloadTask(String fileName) async {
+    try {
+      final session = supabase.auth.currentSession;
+      if (session == null) throw Exception("User not logged in");
+      final String userId = session.user.id;
+
+      final userResponse = await supabase.from('profiles').select('group_id').eq('id', userId).single();
+      final int? groupId = userResponse['group_id'];
+      if (groupId == null) throw Exception("User not joined in group!");
+
+      final response = await supabase.storage.from('task_results').download('group-$groupId/$fileName');
+      if (response.isEmpty) throw Exception('Download failed!');
+      final data = await FileStorage.writeCounter(response.toString(), fileName);
+      print(data.path);
+
+      return data;
+    } catch (e) {
+      rethrow;
     }
   }
 

@@ -46,8 +46,6 @@ class _MemberTaskDetailPageState extends State<MemberTaskDetailPage> {
     }
   }
 
-  void _downloadFile() async {}
-
   @override
   void dispose() {
     _taskReportDescription.dispose();
@@ -92,6 +90,7 @@ class _MemberTaskDetailPageState extends State<MemberTaskDetailPage> {
           String memberRole = '';
           int memberLevel = 0;
           bool isActive = false;
+          String resultFileUrl = '';
 
           if (state is LoadingState) {
             return const Center(
@@ -112,6 +111,10 @@ class _MemberTaskDetailPageState extends State<MemberTaskDetailPage> {
               if (_taskReportDescription.text.isEmpty) {
                 _taskReportDescription.text = state.data.resultReport;
               }
+              resultFileUrl = Uri.parse(state.data.resultFile).toString();
+              if (resultFileUrl.isNotEmpty) {
+                fileName = resultFileUrl.split('/').last;
+              }
             } else if (state.data is bool) {
               context.read<TaskCubit>().resetState();
               Future.delayed(Duration.zero, () {
@@ -123,6 +126,18 @@ class _MemberTaskDetailPageState extends State<MemberTaskDetailPage> {
                   );
                 }
               });
+            } else {
+              // TODO: buat kondisi pas beres download tidak error, mirip delete task
+              context.read<TaskCubit>().resetState();
+              context.read<TaskCubit>().getTaskDetail(widget.taskId);
+              Flushbar(
+                message: 'Download berhasil!',
+                flushbarPosition: FlushbarPosition.BOTTOM,
+                margin: const EdgeInsets.all(8),
+                borderRadius: BorderRadius.circular(10),
+                duration: const Duration(seconds: 2),
+                isDismissible: false,
+              ).show(context);
             }
           }
 
@@ -236,7 +251,9 @@ class _MemberTaskDetailPageState extends State<MemberTaskDetailPage> {
                         ),
                         child: ListTile(
                           onTap: () {
-                            isActive == true ? _pickFile() : _downloadFile();
+                            isActive == true
+                              ? _pickFile()
+                              : context.read<TaskCubit>().downloadTask(fileName!);
                           },
                           title: Text(fileName ?? 'Pilih file...',
                             style: const TextStyle(
